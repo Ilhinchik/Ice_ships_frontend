@@ -1,0 +1,1 @@
+{"name":"Заявки на проводку кораблей","short_name":"ЗПК","start_url":"/Ice_ships_frontend/","display":"standalone","background_color":"#ffffff","lang":"en","scope":"/Ice_ships_frontend/","description":"Описание","theme_color":"#ffffff","icons":[{"src":"pwa-192x192.png","sizes":"192x192","type":"image/png"},{"src":"pwa-512x512.png","sizes":"512x512","type":"image/png"}]}
