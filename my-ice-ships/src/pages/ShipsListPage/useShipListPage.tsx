@@ -1,18 +1,21 @@
 import {useEffect, useState} from "react";
 import {IShip} from "../../core/api/ship/typing.tsx";
 import {getShipList} from "../../core/api/ship";
+import {selectApp} from "../../core/store/slices/selectors";
+import {useSelector, useDispatch} from "../../core/store";
 
 import {shipList as SHIP_LIST_MOCK} from "../../core/mock/shipList.ts";
-import {installShipIcebreaker as INSTALL_SHIP_REQUEST_MOCK} from "../../core/mock/installShipIcebreaker.ts";
 
 import {ChangeEvent} from "../../App.typing.tsx";
+import {saveSearchShipTitle} from "../../core/store/slices/appSlice.ts";
 
 export const useShipCatalogPage = () => {
     const [shipList, setShipList] = useState<IShip[]>([]);
-    const [installShipIcebreakerId, setInstallShipIcebreakerId] = useState<number>();
-    const [itemsInCart, setItemsInCart] = useState<number>(0);
+    const installShipIcebreakerId = 0;
+    const itemsInCart = 0;
 
-    const [searchShipTitle, setSearchShipTitle] = useState("");
+    const {searchShipTitle} = useSelector(selectApp);
+    const dispatch = useDispatch();
 
     const handleSearchShipClick = () => {
         getShipList(searchShipTitle)
@@ -28,20 +31,19 @@ export const useShipCatalogPage = () => {
     };
 
     const handleSearchNameChange = (e: ChangeEvent) => {
-        setSearchShipTitle(e.target.value);
+        dispatch(saveSearchShipTitle(e.target.value));
     };
 
     useEffect(() => {
         getShipList()
             .then((data) => {
                 setShipList(data.ships);
-                setInstallShipIcebreakerId(data.draft_icebreaker_id)
-                setItemsInCart(data.ships_count)
             })
             .catch(() => {
-                setShipList(SHIP_LIST_MOCK)
-                setInstallShipIcebreakerId(0)
-                setItemsInCart(INSTALL_SHIP_REQUEST_MOCK.ship_list.length)
+                const filteredShip = SHIP_LIST_MOCK.filter((ship) =>
+                    ship.ship_name.toLowerCase().startsWith(searchShipTitle.toLowerCase())
+                );
+                setShipList(filteredShip);
             });
     }, []);
 
@@ -49,6 +51,7 @@ export const useShipCatalogPage = () => {
         shipList,
         installShipIcebreakerId,
         itemsInCart,
+        searchShipTitle,
         handleSearchShipClick,
         handleSearchNameChange,
     };

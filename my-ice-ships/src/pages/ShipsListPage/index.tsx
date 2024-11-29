@@ -16,6 +16,7 @@ export const ShipCatalogPage: FC<IShipCatalogPageProps> = () => {
         shipList,
         installShipIcebreakerId,
         itemsInCart,
+        searchShipTitle,
         handleSearchShipClick,
         handleSearchNameChange,
     } = useShipCatalogPage();
@@ -35,6 +36,7 @@ export const ShipCatalogPage: FC<IShipCatalogPageProps> = () => {
                             onChange={handleSearchNameChange}
                             placeholder="Найти"
                             aria-label="Найти"
+                            value={searchShipTitle}
                         />
 
                     </div>

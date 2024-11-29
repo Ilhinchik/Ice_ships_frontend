@@ -2,6 +2,8 @@ import "./App.css";
 import {  BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./Routes";
 import { useGlobalProps } from "./hooks/useGlobalProps";
+import {Provider} from "react-redux";
+import {store} from "./core/store";
 
 function App() {
 
@@ -9,7 +11,9 @@ function App() {
 
     return (
         <BrowserRouter basename="/Ice_ships_frontend">
-            <AppRoutes {...globalProps} />
+            <Provider store={store}>
+                <AppRoutes {...globalProps} />
+            </Provider>
         </BrowserRouter>
     );
 }
