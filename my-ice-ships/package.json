@@ -8,10 +8,15 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "tauri": "tauri",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.4.0",
+    "@tauri-apps/plugin-fs": "^2.0.2",
+    "@tauri-apps/plugin-http": "^2.0.1",
+    "@tauri-apps/plugin-log": "^2.0.0",
+    "@tauri-apps/plugin-shell": "^2",
     "bootstrap": "^5.3.3",
     "gh-pages": "^6.2.0",
     "react": "^18.3.1",
@@ -23,7 +28,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+    "@tauri-apps/api": "^2.1.1",
     "@tauri-apps/cli": "^2.1.0",
+    "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-router-dom": "^5.3.3",

@@ -26,6 +26,7 @@ const manifestForPlugin: Partial<VitePWAOptions> = {
     }
 };
 
+const host = process.env.TAURI_DEV_HOST;
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,9 +37,11 @@ export default defineConfig({
   base: "/Ice_ships_frontend",
   server: {
       port: 3000,
+      strictPort: true,
+      host: host || false,
       proxy: {
           "/api": {
-              target: "http://localhost:8000",
+              target: "http://192.168.1.120:8000",
               changeOrigin: true,
           },
       },
