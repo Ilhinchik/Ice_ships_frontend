@@ -34,7 +34,6 @@ export default defineConfig({
     react(),
     VitePWA(manifestForPlugin)
   ],
-  base: "/Ice_ships_frontend",
   server: {
       port: 3000,
       strictPort: true,
