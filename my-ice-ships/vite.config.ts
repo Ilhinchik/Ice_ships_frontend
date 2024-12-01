@@ -35,7 +35,7 @@ export default defineConfig({
     VitePWA(manifestForPlugin)
   ],
   server: {
-      port: 3001,
+      port: 3000,
       strictPort: true,
       host: host || false,
       proxy: {

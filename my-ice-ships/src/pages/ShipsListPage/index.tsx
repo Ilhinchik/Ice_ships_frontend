@@ -49,14 +49,14 @@ export const ShipCatalogPage: FC<IShipCatalogPageProps> = () => {
                         </Button>
                     </div>
 
-                    <Link
+                    {/* <Link
                         to={"/icebreakers/" + installShipIcebreakerId}
                         className={installShipIcebreakerId !== undefined && installShipIcebreakerId !== null && installShipIcebreakerId !== 0 ? "btn dark-blue-border cart-button" : "btn dark-blue-border cart-button non-clickable"}
                         state={{from: installShipIcebreakerId}}
                     >
                         {itemsInCart}
                         <img src={cartImage} width="25" alt="cart"/>
-                    </Link>
+                    </Link> */}
                 </Container>
 
                 {shipList && !!shipList.length ? (
