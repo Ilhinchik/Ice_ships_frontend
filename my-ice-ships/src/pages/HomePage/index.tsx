@@ -5,7 +5,7 @@ import {IHomePageProps} from "./typing";
 import {Container} from "react-bootstrap";
 import {Navbar} from "../../components/Navbar";
 
-export const HomePage: FC<IHomePageProps> = () => {
+export const HomePage = () => {
     return (
         <>
             <Navbar/>

@@ -1,21 +1,20 @@
-/* .ship-card-img {
-    width: 90%;
+.software-card-img {
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10px;
-} */
-
+    margin-top: 20px;
+}
 
 .dark-blue-btn {
-    background-color: #0D6AAD;
+    background-color: #202e3b;
     color: #fff;
-    border-color: #0D6AAD;
+    border-color: #202e3b;
 }
 
 .dark-blue-btn:hover {
     background-color: #fff;
-    border-color: #0D6AAD;
-    color: #0D6AAD;
+    border-color: #202e3b;
+    color: #202e3b;
 }
 
 .not-found-alert {
@@ -23,8 +22,8 @@
 }
 
 .dark-blue-border {
-    border-color: #0D6AAD;
-    color: black;
+    border-color: #202e3b;
+    color: #202e3b;
 }
 
 .dark-blue-border:hover {
@@ -36,23 +35,11 @@
 .non-clickable {
     pointer-events: none;
     text-decoration: none;
+    background-color: #efefef;
+    border-color: #444;
+    color: #444;
 }
 
 .cart-button {
     min-width: 65px;
-}
-
-@media (min-width: 1200px) {
-}
-
-@media (max-width: 1200px) {
-}
-
-@media (max-width: 992px) {
-}
-
-@media (max-width: 768px) {
-}
-
-@media (max-width: 576px) {
 }

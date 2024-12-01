@@ -1,2 +1,2 @@
-export interface IShipPageProps {
-}
+// export interface IShipPageProps {
+// }

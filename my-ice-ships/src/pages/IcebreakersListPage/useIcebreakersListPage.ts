@@ -1,43 +1,43 @@
 import React, {useEffect, useState} from "react";
-import {IISRFiltersProps} from "../../components/ISRFilters/typing.tsx";
-import {IISRTableProps, IISRTableRow} from "../../components/ISRTable/typing.tsx";
-import {api} from "../../core/api";
-import {InstallSoftwareRequest} from "../../core/api/Api.ts";
+import {IFiltersProps} from "../../components/IFilters/typing.tsx";
+import {ITableProps, ITableRow} from "../../components/ITable/typing.tsx";
+import {api} from "../../core/api/index.ts";
+import {Icebreaker} from "../../core/api/Api.ts";
 import {
-    installSoftwareRequestsList as INSTALL_SOFTWARE_REQUESTS_LIST_MOCK
-} from "../../core/mock/installSoftwareRequestsList.ts";
-import {useDispatch, useSelector} from "../../core/store";
+    IcebreakersList as ICEBREAKERS_LIST_MOCK
+} from "../../core/mock/IcebreakersList.ts";
+import {useDispatch, useSelector} from "../../core/store/index.ts";
 import {selectApp} from "../../core/store/slices/selectors.ts";
 import {
-    saveFilterISREndDate,
-    saveFilterISRStartDate,
-    saveFilterISRStatus
+    saveFilterIEndDate,
+    saveFilterIStartDate,
+    saveFilterIStatus
 } from "../../core/store/slices/appSlice.ts";
 
-export const useInstallSoftwareRequestsListPage = () => {
-    const [tableProps, setTableProps] = useState<IISRTableProps>({rows: []});
+export const useIcebreakersListPage = () => {
+    const [tableProps, setTableProps] = useState<ITableProps>({rows: []});
 
-    const {filterISRStatus, filterISRStartDate, filterISREndDate} = useSelector(selectApp);
+    const {filterIStatus, filterIStartDate, filterIEndDate} = useSelector(selectApp);
     const dispatch = useDispatch();
 
     const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        dispatch(saveFilterISRStatus(event.target.value))
+        dispatch(saveFilterIStatus(event.target.value))
     };
 
     const handleStartDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(saveFilterISRStartDate(event.target.value))
+        dispatch(saveFilterIStartDate(event.target.value))
     };
 
     const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(saveFilterISREndDate(event.target.value))
+        dispatch(saveFilterIEndDate(event.target.value))
     };
 
-    const handleFilterISRClick = () => {
-        api.installSoftwareRequests.installSoftwareRequestsList(
+    const handleFilterIClick = () => {
+        api.icebreakers.icebreakersList(
             {
-                status: mapStringToOptQueryParam(filterISRStatus),
-                formation_start: mapStringToOptQueryParam(filterISRStartDate),
-                formation_end: mapStringToOptQueryParam(filterISREndDate),
+                status: mapStringToOptQueryParam(filterIStatus),
+                formation_start: mapStringToOptQueryParam(filterIStartDate),
+                formation_end: mapStringToOptQueryParam(filterIEndDate),
             })
             .then((data) => {
                 setTableProps(mapBackendResultToTableData(data.data))
@@ -45,28 +45,28 @@ export const useInstallSoftwareRequestsListPage = () => {
             .catch(() => {
                 setTableProps(
                     mapBackendResultToTableData(
-                        filterDataOnFront(INSTALL_SOFTWARE_REQUESTS_LIST_MOCK,
-                            mapStringToOptQueryParam(filterISRStatus),
-                            mapStringToOptQueryParam(filterISRStartDate),
-                            mapStringToOptQueryParam(filterISREndDate))
+                        filterDataOnFront(ICEBREAKERS_LIST_MOCK,
+                            mapStringToOptQueryParam(filterIStatus),
+                            mapStringToOptQueryParam(filterIStartDate),
+                            mapStringToOptQueryParam(filterIEndDate))
                     )
                 );
             })
     };
 
-    useEffect(handleFilterISRClick,
+    useEffect(handleFilterIClick,
         // eslint-disable-next-line react-hooks/exhaustive-deps
         []);
 
-    const filtersProps: IISRFiltersProps = {
-        selectedStatus: filterISRStatus,
-        selectedStartDate: filterISRStartDate,
-        selectedEndDate: filterISREndDate,
+    const filtersProps: IFiltersProps = {
+        selectedStatus: filterIStatus,
+        selectedStartDate: filterIStartDate,
+        selectedEndDate: filterIEndDate,
 
         handleStatusChange: handleStatusChange,
         handleStartDateChange: handleStartDateChange,
         handleEndDateChange: handleEndDateChange,
-        handleFilterISRClick: handleFilterISRClick,
+        handleFilterIClick: handleFilterIClick,
     };
 
     const b: boolean = false;
@@ -106,10 +106,10 @@ function convertDatetimeToDDMMYYYY(dateString: string | null | undefined): strin
     return `${day}.${month}.${year}`;
 }
 
-export function mapBackendResultToTableData(requests: InstallSoftwareRequest[]): IISRTableProps {
-    const rows: IISRTableRow[] = requests.map((request) => {
+export function mapBackendResultToTableData(requests: Icebreaker[]): ITableProps {
+    const rows: ITableRow[] = requests.map((request) => {
         return {
-            number: request.pk || 0,
+            number: request.id || 0,
             status: mapStatusToTable(request.status),
             creationDate: convertDatetimeToDDMMYYYY(request.creation_datetime),
             registrationDate: convertDatetimeToDDMMYYYY(request.formation_datetime),

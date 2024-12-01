@@ -1,22 +1,22 @@
 import "./InstallSoftwareRequestPage.css";
 import {Container} from "react-bootstrap";
 import {Related} from "../../core/api/Api.ts";
-import {SoftwareInRequestCard} from "../../components/SoftwareInRequestCard";
+import {ShipInIcebreakerCard} from "../../components/ShipInIcebreakerCard";
 import {ISoftwareInRequestCardProps} from "../../components/SoftwareInRequestCard/typing.tsx";
 import {Breadcrumbs} from "../../components/Breadcrumbs";
 
-import {useInstallSoftwareRequestPage} from "./useInstallSoftwareRequestPage.ts";
+import {useInstallSoftwareRequestPage} from "./useIcebreakerPage.ts";
 
-function calculateTotalPrice(softwareItems?: (Related | undefined)[]): number {
-    return softwareItems?.reduce((total, item) => {
-        if (item && item.software) {
-            return total + item.software.price;
+function calculateTotalPrice(shipItems?: (Related | undefined)[]): number {
+    return shipItems?.reduce((total, item) => {
+        if (item && item.ship) {
+            return total + item.ship.price;
         }
         return total;
     }, 0) || 0;
 }
 
-export const InstallSoftwareRequestPage = () => {
+export const IcebreakerPage = () => {
         const {
             installSoftwareRequestContentData,
             isEditable,
@@ -35,7 +35,7 @@ export const InstallSoftwareRequestPage = () => {
                     middleItems={[
                         {
                             name: "Каталог",
-                            link: "/software_catalog"
+                            link: "/ship_catalog"
                         }
                     ]}
                     endItem={"Заказ на установку ПО № " + installSoftwareRequestContentData?.pk}
@@ -68,16 +68,16 @@ export const InstallSoftwareRequestPage = () => {
                     </div>
                 </div>
 
-                {installSoftwareRequestContentData?.software_list && !!installSoftwareRequestContentData.software_list.length ? (
+                {installSoftwareRequestContentData?.ship_list && !!installSoftwareRequestContentData.ship_list.length ? (
                     <>
-                        {installSoftwareRequestContentData.software_list.map((software: Related, index: number) => {
+                        {installSoftwareRequestContentData.ship_list.map((ship: Related, index: number) => {
                             const props: ISoftwareInRequestCardProps = {
-                                id: software.software.pk,
-                                title: software.software.title,
-                                summary: software.software.summary,
-                                price: software.software.price,
-                                logoFilePath: software.software.logo_file_path,
-                                version: software.version,
+                                id: ship.ship.pk,
+                                title: ship.ship.title,
+                                summary: ship.ship.summary,
+                                price: ship.ship.price,
+                                logoFilePath: ship.ship.logo_file_path,
+                                version: ship.version,
                                 isEditable: isEditable,
                                 isrID: id || "",
                                 handleClickDelete: handleClickDelete,
@@ -102,7 +102,7 @@ export const InstallSoftwareRequestPage = () => {
                         </div>
                         <div className="col-md-2">
                             <div className="card-body">
-                                <strong>{calculateTotalPrice(installSoftwareRequestContentData?.software_list)} руб.</strong>
+                                <strong>{calculateTotalPrice(installSoftwareRequestContentData?.ship_list)} руб.</strong>
                             </div>
                         </div>
                     </div>

@@ -1,16 +1,23 @@
 import "./App.css";
-import {  HashRouter } from "react-router-dom";
-import { AppRoutes } from "./Routes";
-import { useGlobalProps } from "./hooks/useGlobalProps";
+import {AppRoutes} from "./Routes";
+import {useDispatch} from "./core/store";
+import {USER_NAME} from "./env.tsx";
+import {saveUser} from "./core/store/slices/userSlice.ts";
+
 
 function App() {
-
-    const globalProps = useGlobalProps();
+    const dispatch = useDispatch();
+    const username = localStorage.getItem(USER_NAME);
+    const isAuth = !!username;
+    dispatch(
+        saveUser({
+            username: username || "",
+            isAuth: isAuth,
+        })
+    );
 
     return (
-        <HashRouter>
-            <AppRoutes {...globalProps} />
-        </HashRouter>
+        <AppRoutes/>
     );
 }
 

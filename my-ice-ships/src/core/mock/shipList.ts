@@ -1,7 +1,7 @@
-import {IShip} from "../api/ship/typing.ts";
+import {Ship} from "../api/Api.ts";
 
 
-export const shipList: IShip[] = [
+export const shipList: Ship[] = [
     {'id': 0, 
         'ship_name': 'Танкер TBN0986', 
         'year': 2000, 
