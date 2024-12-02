@@ -1,6 +1,6 @@
 import {Icebreaker} from "../api/Api.ts";
 
-export const Icebreaker: Icebreaker = {
+export const OIcebreaker: Icebreaker = {
     id: 1,
     status: 1,
     date_created: "2024-10-20T15:07:21.219Z",

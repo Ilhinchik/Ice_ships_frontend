@@ -5,7 +5,7 @@ import {ShipInIcebreakerCard} from "../../components/ShipInIcebreakerCard";
 import {ISoftwareInRequestCardProps} from "../../components/SoftwareInRequestCard/typing.tsx";
 import {Breadcrumbs} from "../../components/Breadcrumbs";
 
-import {useInstallSoftwareRequestPage} from "./useIcebreakerPage.ts";
+import {useIcebreakerPage} from "./useIcebreakerPage.ts";
 
 function calculateTotalPrice(shipItems?: (Related | undefined)[]): number {
     return shipItems?.reduce((total, item) => {
