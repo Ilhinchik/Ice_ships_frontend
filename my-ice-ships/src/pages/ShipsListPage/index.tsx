@@ -1,21 +1,21 @@
 import "./index.css";
 import {FC} from "react";
 import {IShipCatalogPageProps} from "./typing";
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 
 import {Navbar} from "../../components/Navbar";
 import {Button, Container} from "react-bootstrap";
 import {ShipCard} from "../../components/ShipCard";
 import {useShipCatalogPage} from "./useShipListPage.tsx";
 import {IShipCardProps} from "../../components/ShipCard/typing.tsx";
-import cartImage from "/images/folder.png"
+// import cartImage from "/images/folder.png"
 import {Breadcrumbs} from "../../components/Breadcrumbs";
 
 export const ShipCatalogPage: FC<IShipCatalogPageProps> = () => {
     const {
         shipList,
-        installShipIcebreakerId,
-        itemsInCart,
+        // installShipIcebreakerId,
+        // itemsInCart,
         handleSearchShipClick,
         handleSearchNameChange,
     } = useShipCatalogPage();
