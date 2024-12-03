@@ -22,6 +22,19 @@ const manifestForPlugin: Partial<VitePWAOptions> = {
                 sizes: '512x512',
                 type: 'image/png'
             }
+        ],
+        screenshots: [
+            {
+                src: '/screenshot-desktop.png',
+                sizes: '1280x720',
+                type: 'image/png',
+                form_factor: 'wide'
+            },
+            {
+                src: '/screenshot-mobile.png',
+                sizes: '720x1280',
+                type: 'image/png'
+            }
         ]
     }
 };
@@ -34,6 +47,7 @@ export default defineConfig({
     react(),
     VitePWA(manifestForPlugin)
   ],
+  base: "/Ice_ships_frontend/",
   server: {
       port: 3000,
       strictPort: true,

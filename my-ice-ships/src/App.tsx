@@ -10,7 +10,7 @@ function App() {
     const globalProps = useGlobalProps();
 
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="Ice_ships_frontend">
             <Provider store={store}>
                 <AppRoutes {...globalProps} />
             </Provider>
