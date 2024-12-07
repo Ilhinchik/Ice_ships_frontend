@@ -33,7 +33,7 @@ export const AppRoutes = () => {
                     element: <HomePage/>,
                 },
                 {
-                    path: "/ship_list",
+                    path: "/ships_list",
                     element: <ShipsListPage/>,
                 },
                 {

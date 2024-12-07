@@ -44,6 +44,19 @@ export interface Ship {
   description?: string;
 }
 
+export interface GetShip {
+  ship: Ship[];
+  /** Install ship request id */
+  install_ship_request_id?: number | null;
+  /** Items in cart */
+  items_in_cart: number;
+}
+
+interface Related {
+  ship: Ship;
+  version: string;
+}
+
 export interface Icebreaker {
   /** ID */
   id?: number;
@@ -87,6 +100,7 @@ export interface Icebreaker {
   finish_point?: string | null;
   /** Результат проводки (0/1) */
   result?: boolean | null;
+  ship_list?: Related[];
 }
 
 export interface ShipIcebreaker {
@@ -452,7 +466,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       },
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
+      this.request<GetShip, void>({
         path: `/ships/`,
         method: "GET",
         query: query,

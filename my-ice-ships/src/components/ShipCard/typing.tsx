@@ -1,8 +1,9 @@
 export interface IShipCardProps {
     id: number;
-    title: string;
-    summary: string;
-    price: number;
-    logoFilePath: string;
+    ship_name: string;
+    ice_class?: string;
+    length?: number | null;
+    engine?: string;
+    logoFilePath?: string;
     updateCatalogPageFunc: () => void;
 }

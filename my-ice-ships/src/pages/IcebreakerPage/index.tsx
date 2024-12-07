@@ -1,134 +1,81 @@
-import "./InstallSoftwareRequestPage.css";
-import {Container} from "react-bootstrap";
-import {Related} from "../../core/api/Api.ts";
-import {ShipInIcebreakerCard} from "../../components/ShipInIcebreakerCard";
-import {ISoftwareInRequestCardProps} from "../../components/SoftwareInRequestCard/typing.tsx";
-import {Breadcrumbs} from "../../components/Breadcrumbs";
+import "./IcebreakerPage.css";
+import { Container } from "react-bootstrap";
+import { ShipInIcebreakerCard } from "../../components/ShipInIcebreakerCard";
+import { Breadcrumbs } from "../../components/Breadcrumbs";
+import { useIcebreakerPage } from "./useIcebreakerPage";
 
-import {useIcebreakerPage} from "./useIcebreakerPage.ts";
-
-function calculateTotalPrice(shipItems?: (Related | undefined)[]): number {
+function calculateTotalPrice(shipItems?: any[]): number {
     return shipItems?.reduce((total, item) => {
-        if (item && item.ship) {
-            return total + item.ship.price;
-        }
-        return total;
+        return total + (item.ship?.price || 0);
     }, 0) || 0;
 }
 
 export const IcebreakerPage = () => {
-        const {
-            installSoftwareRequestContentData,
-            isEditable,
-            host,
-            id,
-            updVersion,
-            handleClickDelete,
-            handleChangeHost,
-            handleClearClick,
-            handleFormClick,
-        } = useInstallSoftwareRequestPage()
+    const {
+        IcebreakerData,
+        isEditable,
+        id,
+        updVersion,
+        handleClickDelete,
+        handleClearClick,
+        handleFormClick,
+    } = useIcebreakerPage();
 
-        return (
-            <Container className="mb-4">
-                <Breadcrumbs
-                    middleItems={[
-                        {
-                            name: "Каталог",
-                            link: "/ship_catalog"
-                        }
-                    ]}
-                    endItem={"Заказ на установку ПО № " + installSoftwareRequestContentData?.pk}
-                />
-                <div className="card card-body mb-3 mt-4 row g-0">
-                    <div className="row g-0">
-                        <div className="col-md-2">
-                            <h5 className="card-title">Сервер пользователя</h5>
+    return (
+        <Container className="mb-4">
+            <Breadcrumbs
+                middleItems={[
+                    {
+                        name: "Каталог",
+                        link: "/ship_catalog",
+                    },
+                ]}
+                endItem={`Заказ на установку ПО № ${IcebreakerData?.id}`}
+            />
+            {IcebreakerData?.ship_list?.length ? (
+                IcebreakerData.ship_list.map((ship, index) => (
+                    <ShipInIcebreakerCard
+                        key={index}
+                        id={ship.ship.id}
+                        ship_name={ship.ship.ship_name}
+                        year={ship.ship.year}
+                        ice_class={ship.ship.ice_class}
+                        logoFilePath={ship.ship.image}
+                        length={ship.ship.length}
+                        engine={ship.ship.engine}
+                        isEditable={isEditable}
+                        isrID={id || ""}
+                        handleClickDelete={handleClickDelete}
+                        handleUpdateVersion={updVersion}
+                    />
+                ))
+            ) : (
+                <p>Нет данных для отображения.</p>
+            )}
+            <div className="card mb-3">
+                <div className="row g-0">
+                    <div className="col-md-10">
+                        <div className="card-body">
+                            <h5 className="card-title">ИТОГО:</h5>
                         </div>
-                        <div className="col-md-2">
-                            {
-                                isEditable ?
-                                    <input
-                                        type="text"
-                                        className="input form-control"
-                                        aria-label="host"
-                                        value={host}
-                                        onChange={handleChangeHost}
-                                    />
-                                    :
-                                    <input
-                                        type="text"
-                                        className="input form-control"
-                                        aria-label="host"
-                                        value={host}
-                                        readOnly
-                                    />
-                            }
+                    </div>
+                    <div className="col-md-2">
+                        <div className="card-body">
+                            <strong>{calculateTotalPrice(IcebreakerData?.ship_list)} руб.</strong>
                         </div>
                     </div>
                 </div>
-
-                {installSoftwareRequestContentData?.ship_list && !!installSoftwareRequestContentData.ship_list.length ? (
-                    <>
-                        {installSoftwareRequestContentData.ship_list.map((ship: Related, index: number) => {
-                            const props: ISoftwareInRequestCardProps = {
-                                id: ship.ship.pk,
-                                title: ship.ship.title,
-                                summary: ship.ship.summary,
-                                price: ship.ship.price,
-                                logoFilePath: ship.ship.logo_file_path,
-                                version: ship.version,
-                                isEditable: isEditable,
-                                isrID: id || "",
-                                handleClickDelete: handleClickDelete,
-                                handleUpdateVersion: updVersion,
-                            };
-                            return (
-                                <SoftwareInRequestCard key={index} {...props} />
-                            );
-                        })}
-                    </>
-                ) : (
-                    <></>
-                )}
-                <div className="card mb-3">
-                    <div className="row g-0">
-                        <div className="col-md-10">
-                            <div className="card-body">
-                                <h5 className="card-title">
-                                    ИТОГО:
-                                </h5>
-                            </div>
-                        </div>
-                        <div className="col-md-2">
-                            <div className="card-body">
-                                <strong>{calculateTotalPrice(installSoftwareRequestContentData?.ship_list)} руб.</strong>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            {isEditable && (
+                <div className="d-flex justify-content-end">
+                    <button type="button" className="btn dark-blue-border me-3" onClick={handleClearClick}>
+                        Очистить
+                    </button>
+                    <button type="button" className="btn dark-blue-btn" onClick={handleFormClick}>
+                        Оформить
+                    </button>
                 </div>
-                {
-                    isEditable ?
-                        <div className="d-flex justify-content-end">
-                            <button
-                                type="button"
-                                className="btn dark-blue-border me-3"
-                                onClick={handleClearClick}
-                            >
-                                Очистить
-                            </button>
-                            <button
-                                type="button"
-                                className="btn dark-blue-btn"
-                                onClick={handleFormClick}
-                            >
-                                Оформить
-                            </button>
-                        </div>
-                        :
-                        <></>
-                }
-            </Container>
-        );
-    }
-;
+            )}
+        </Container>
+    );
+};

@@ -1,4 +1,4 @@
-import "./InstallSoftwareRequestsListPage.css";
+import "./IcebreakerListPage.css";
 import {Container} from 'react-bootstrap';
 import {IFilters} from "../../components/IFilters/index.tsx";
 import {useIcebreakersListPage} from "./useIcebreakersListPage.ts";

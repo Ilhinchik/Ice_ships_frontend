@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "../../core/store/index.ts";
 import {api} from "../../core/api/index.ts";
 
 import {shipList as SOFTWARE_LIST_MOCK} from "../../core/mock/shipList.ts";
-import {Icebreaker as INSTALL_SOFTWARE_REQUEST_MOCK} from "../../core/mock/Icebreaker.ts";
+import {OIcebreaker as INSTALL_ICEBREAKER_MOCK} from "../../core/mock/Icebreaker.ts";
 
 import {ChangeEvent} from "../../App.typing.tsx";
 import {saveSearchShipTitle} from "../../core/store/slices/appSlice.ts";
@@ -31,11 +31,11 @@ export const useShipsListPage = () => {
             })
             .catch(() => {
                 const filteredShip = SOFTWARE_LIST_MOCK.filter((ship) =>
-                    ship.title.toLowerCase().startsWith(searchShipTitle.toLowerCase())
+                    ship.ship_name.toLowerCase().startsWith(searchShipTitle.toLowerCase())
                 );
                 setShipList(filteredShip);
                 setISRId(1)
-                setItemsInCart(INSTALL_SOFTWARE_REQUEST_MOCK.ship_list.length)
+                setItemsInCart(INSTALL_ICEBREAKER_MOCK.ship_list?.length || 0)
                 setIsPageActive(true)
             });
     };

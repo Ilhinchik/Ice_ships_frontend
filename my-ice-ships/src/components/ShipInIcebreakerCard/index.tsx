@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from "react";
 import {IShipInIcebreakerCardProps} from "./typing.tsx";
-import unknownImage from "/unknown.jpg"
+import unknownImage from "/images/unknown.png"
 import {Link} from "react-router-dom";
 import {ChangeEvent} from "../../App.typing.tsx";
 import {api} from "../../core/api";
@@ -8,20 +8,20 @@ import {store} from "../../core/store";
 import {addNotification} from "../../core/store/slices/appSlice.ts";
 
 export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShipInIcebreakerCardProps) => {
-    const [version, setVersion] = useState<string>("");
+    const [order, setOrder] = useState<number>();
 
-    const handleChangeVersion = (e: ChangeEvent) => {
-        setVersion(e.target.value)
-        software.handleUpdateVersion(software.id || 0, e.target.value)
-    };
+    // const handleChangeVersion = (e: ChangeEvent) => {
+    //     setOrder(e.target.value)
+    //     ship.handleUpdateVersion(ship.id || 0, e.target.value)
+    // };
 
-    useEffect(() => {
-        setVersion(software.version)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    // useEffect(() => {
+    //     setVersion(ship.version)
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
 
     const handleDeleteClick = () => {
-        api.softwareInRequest.softwareInRequestDeleteDelete(software.isrID, software.id?.toString() || "")
+        api.icebreakers.icebreakersDeleteShipDelete(ship.isrID, ship.id?.toString() || "")
             .then(() => {
                     store.dispatch(
                         addNotification({
@@ -29,7 +29,7 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
                             isError: false,
                         })
                     );
-                    software.handleClickDelete(software?.id || 0)
+                    ship.handleClickDelete(ship?.id || 0)
                 }
             )
             .catch(() => {
@@ -48,33 +48,33 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
             <div className="row g-0">
                 <div className="col-md-2 card-body">
                     <img
-                        src={software.logoFilePath ? (software.logoFilePath) : (unknownImage)}
+                        src={ship.logoFilePath ? (ship.logoFilePath) : (unknownImage)}
                         className="img-fluid rounded-start"
-                        alt={software.title}
+                        alt={ship.ship_name}
                         width="100px"
                     />
                 </div>
                 <div className="col-md-6 card-body">
                     <h5 className="card-title">
                         <Link
-                            to={"/software/" + software.id}
-                            id={software.title}
+                            to={"/ship/" + ship.id}
+                            id={ship.ship_name}
                             className="text-black text-decoration-none"
-                            state={{from: software.title}}
+                            state={{from: ship.ship_name}}
                         >
-                            {software.title}
+                            {ship.ship_name}
                         </Link>
                     </h5>
                 </div>
                 <div className="col-md-2 card-body">
                     <div className="input-group input-group-sm mb-3">
                         <span className="input-group-text" id="inputGroup-sizing-sm">Версия</span>
-                        {
-                            software.isEditable ?
+                        {/* {
+                            ship.isEditable ?
                                 <input
                                     type="text"
                                     className="input form-control"
-                                    aria-label={software.id?.toString()}
+                                    aria-label={ship.id?.toString()}
                                     value={version}
                                     onChange={handleChangeVersion}
                                 />
@@ -86,17 +86,17 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
                                     value={version}
                                     readOnly
                                 />
-                        }
+                        } */}
                     </div>
                 </div>
                 <div className="col-md-1 card-body">
-                    <p className="card-text"><strong>{software.price} руб.</strong></p>
+                    <p className="card-text"><strong>{ship.length} руб.</strong></p>
                 </div>
 
 
                 <div className="col-md-1 card-body close-col">
-                    {
-                        software.isEditable ?
+                    {/* {
+                        ship.isEditable ?
                             <button
                                 type="button"
                                 className="btn-close mt-1"
@@ -105,7 +105,7 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
                             ></button>
                             :
                             <></>
-                    }
+                    } */}
                 </div>
             </div>
         </div>

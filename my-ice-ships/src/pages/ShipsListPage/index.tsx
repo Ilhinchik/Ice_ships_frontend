@@ -1,11 +1,11 @@
-import "./ShipCatalogPage.css";
+import "./index.css";
 import {Link} from "react-router-dom";
 
 import {Button, Container} from "react-bootstrap";
 import {ShipCard} from "../../components/ShipCard";
 import {useShipsListPage} from "./useShipsListPage.tsx";
 import {IShipCardProps} from "../../components/ShipCard/typing.tsx";
-import cartImage from "/cart.png"
+import cartImage from "/images/cart.png"
 import {Breadcrumbs} from "../../components/Breadcrumbs";
 import {LoadingAnimation} from "../../components/LoadingAnimation";
 
@@ -47,7 +47,7 @@ export const ShipsListPage = () => {
                 </div>
 
                 <Link
-                    to={"/install_ship_request/" + ISRId}
+                    to={"/icebreaker/" + ISRId}
                     className={ISRId !== undefined && ISRId !== null && ISRId !== 0 ? "btn dark-blue-border cart-button" : "btn cart-button non-clickable"}
                     state={{from: ISRId}}
                 >
@@ -68,8 +68,8 @@ export const ShipsListPage = () => {
                                         ship_name: ship.ship_name,
                                         ice_class: ship.ice_class,
                                         length: ship.length,
-                                        image: ship.image,
-                                        engine: ship.engine
+                                        logoFilePath: ship.image,
+                                        engine: ship.engine,
                                         updateCatalogPageFunc: updateCatalogPageFunc,
                                     };
 

@@ -1,10 +1,10 @@
-import "./ShipPage.css";
+import "./index.css";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {Container} from "react-bootstrap";
 
 import {shipList as SOFTWARE_LIST_MOCK} from "../../core/mock/shipList.ts";
-import unknownImage from "/unknown.jpg"
+import unknownImage from "/images/unknown.png"
 import {Breadcrumbs} from "../../components/Breadcrumbs";
 import {Ship} from "../../core/api/Api.ts";
 import {api} from "../../core/api";
@@ -42,7 +42,7 @@ export const ShipPage = () => {
                 middleItems={[
                     {
                         name: "Каталог",
-                        link: "/ship_catalog"
+                        link: "/ships_list"
                     }
                 ]}
                 endItem={shipData?.ship_name}

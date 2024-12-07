@@ -1,14 +1,9 @@
 import "./index.css";
-import {FC} from "react";
-import {IHomePageProps} from "./typing";
-
 import {Container} from "react-bootstrap";
-import {Navbar} from "../../components/Navbar";
 
 export const HomePage = () => {
     return (
         <>
-            <Navbar/>
                 <Container className="intro">
                     <h1>Проводка ледовых кораблей ледоколом</h1>
                     <Container className="div text">

@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {IShipCardProps} from "./typing.tsx";
-import unknownImage from "/unknown.jpg"
+import unknownImage from "/images/unknown.png"
 import {Link} from "react-router-dom";
 import {store, useSelector} from "../../core/store";
 import {selectUser} from "../../core/store/slices/selectors.ts";
@@ -11,7 +11,7 @@ export const ShipCard: FC<IShipCardProps> = (ship: IShipCardProps) => {
     const {isAuth} = useSelector(selectUser);
 
     const clickAddItem = () => {
-        api.ships.shipAddCreate(ship.id.toString())
+        api.ships.shipsAddToIcebreakerCreate(ship.id.toString())
             .then(() => {
                 ship.updateCatalogPageFunc();
                 store.dispatch(
@@ -46,23 +46,23 @@ export const ShipCard: FC<IShipCardProps> = (ship: IShipCardProps) => {
             <img
                 src={ship.logoFilePath ? (ship.logoFilePath) : (unknownImage)}
                 className="card-img-top ship-card-img"
-                alt={ship.title}
+                alt={ship.ship_name}
             />
             <div className="card-body">
-                <h5 className="card-title">{ship.title}</h5>
-                <p className="card-text">{ship.summary}</p>
+                <h5 className="card-title">{ship.ship_name}</h5>
+                <p className="card-text">{ship.ice_class}</p>
             </div>
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                    Цена: <strong>{ship.price} руб.</strong>
+                    Длина: <strong>{ship.length}</strong>
                 </li>
             </ul>
             <div className="card-footer d-flex justify-content-between">
                 <Link
                     to={"/ship/" + ship.id}
-                    id={ship.title}
+                    id={ship.ship_name}
                     className="btn dark-blue-btn"
-                    state={{from: ship.title}}
+                    state={{from: ship.ship_name}}
                 >
                     Узнать подробнее
                 </Link>
