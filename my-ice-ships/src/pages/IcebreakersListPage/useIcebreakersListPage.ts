@@ -111,9 +111,9 @@ export function mapBackendResultToTableData(requests: Icebreaker[]): ITableProps
         return {
             number: request.id || 0,
             status: mapStatusToTable(request.status),
-            creationDate: convertDatetimeToDDMMYYYY(request.creation_datetime),
-            registrationDate: convertDatetimeToDDMMYYYY(request.formation_datetime),
-            completionDate: convertDatetimeToDDMMYYYY(request.completion_datetime),
+            creationDate: convertDatetimeToDDMMYYYY(request.date_created),
+            registrationDate: convertDatetimeToDDMMYYYY(request.date_formation),
+            completionDate: convertDatetimeToDDMMYYYY(request.date_complete),
         };
     });
 
@@ -121,11 +121,11 @@ export function mapBackendResultToTableData(requests: Icebreaker[]): ITableProps
 }
 
 export function filterDataOnFront(
-    installSoftwareRequestsList: InstallSoftwareRequest[],
+    installSoftwareRequestsList: Icebreaker[],
     filterStatus?: string,
     filterStartDate?: string,
     filterEndDate?: string
-): InstallSoftwareRequest[] {
+): Icebreaker[] {
     return installSoftwareRequestsList.filter((row) => {
         let matchesStatus = true;
         let matchesStartDate = true;
@@ -135,12 +135,12 @@ export function filterDataOnFront(
             matchesStatus = row.status === filterStatus;
         }
 
-        if (filterStartDate && row.formation_datetime) {
-            matchesStartDate = new Date(row.formation_datetime) >= new Date(filterStartDate);
+        if (filterStartDate && row.date_formation) {
+            matchesStartDate = new Date(row.date_formation) >= new Date(filterStartDate);
         }
 
-        if (filterEndDate && row.formation_datetime) {
-            matchesEndDate = new Date(row.formation_datetime) <= new Date(filterEndDate);
+        if (filterEndDate && row.date_formation) {
+            matchesEndDate = new Date(row.date_formation) <= new Date(filterEndDate);
         }
 
         return matchesStatus && matchesStartDate && matchesEndDate;

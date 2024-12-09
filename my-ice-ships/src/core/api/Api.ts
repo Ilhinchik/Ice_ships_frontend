@@ -9,65 +9,9 @@
  * ---------------------------------------------------------------
  */
 
-export interface Ship {
-  /** ID */
-  id?: number;
-  /** Image */
-  image?: string;
-  /**
-   * Название
-   * @minLength 1
-   * @maxLength 100
-   */
-  ship_name: string;
-  /**
-   * Год постройки
-   * @min -2147483648
-   * @max 2147483647
-   */
-  year?: number | null;
-  /**
-   * Ледовый класс
-   * @maxLength 10
-   */
-  ice_class?: string;
-  /** Длина */
-  length?: number | null;
-  /**
-   * Двигатель
-   * @maxLength 255
-   */
-  engine?: string;
-  /** Статус */
-  status?: 1 | 2;
-  /** Описание */
-  description?: string;
-}
-
-export interface GetShip {
-  ship: Ship[];
-  /** Install ship request id */
-  install_ship_request_id?: number | null;
-  /** Items in cart */
-  items_in_cart: number;
-}
-
-interface Related {
-  ship: Ship;
-  version: string;
-}
-
 export interface Icebreaker {
   /** ID */
   id?: number;
-  /** Ships */
-  ships?: string;
-  /** Owner */
-  owner?: string;
-  /** Moderator */
-  moderator?: string;
-  /** Статус */
-  status?: 1 | 2 | 3 | 4 | 5;
   /**
    * Дата создания
    * @format date-time
@@ -83,6 +27,8 @@ export interface Icebreaker {
    * @format date-time
    */
   date_complete?: string | null;
+  /** Moderator */
+  moderator?: string;
   /**
    * Дата проводки
    * @format date
@@ -100,35 +46,254 @@ export interface Icebreaker {
   finish_point?: string | null;
   /** Результат проводки (0/1) */
   result?: boolean | null;
-  ship_list?: Related[];
+  /** Status */
+  status?: "DRAFT" | "DELETED" | "FORMED" | "COMPLETED" | "REJECTED";
+  /** Owner */
+  owner?: string;
 }
 
-export interface ShipIcebreaker {
+export interface ShipForIcebreaker {
   /** ID */
   id?: number;
+  /**
+   * Title
+   * @minLength 1
+   * @maxLength 255
+   */
+  ship_name: string;
+  /**
+   * Ice_class
+   * @minLength 1
+   * @maxLength 255
+   */
+  ice_class: string;
+  /**
+   * Length
+   * @min -2147483648
+   * @max 2147483647
+   */
+  length: number;
+  /**
+   * Logo file path
+   * @minLength 1
+   * @maxLength 255
+   */
+  image?: string;
+}
+
+export interface Related {
+  software: ShipForIcebreaker;
+  /**
+   * Order
+   * @min -2147483648
+   * @max 2147483647
+   */
+  order: number;
+}
+
+export interface FullIcebreaker {
+  /** ID */
+  id?: number;
+  /**
+   * Дата создания
+   * @format date-time
+   */
+  date_created?: string;
+  /**
+   * Дата формирования
+   * @format date-time
+   */
+  date_formation?: string | null;
+  /**
+   * Дата завершения
+   * @format date-time
+   */
+  date_complete?: string | null;
+  /** Модератор */
+  moderator?: number | null;
+  /**
+   * Дата проводки
+   * @format date
+   */
+  date?: string | null;
+  /**
+   * Начальная точка проводки
+   * @maxLength 255
+   */
+  start_point?: string | null;
+  /**
+   * Конечная точка проводки
+   * @maxLength 255
+   */
+  finish_point?: string | null;
+  /** Результат проводки (0/1) */
+  result?: boolean | null;
+  /** Status */
+  status?: "DRAFT" | "DELETED" | "FORMED" | "COMPLETED" | "REJECTED";
+  /** Пользователь */
+  owner?: number;
+  /** Ship list */
+  ship_list?: string;
+}
+
+export interface PutIcebreaker {
+  /** ID */
+  id?: number;
+  /**
+   * Дата создания
+   * @format date-time
+   */
+  date_created?: string;
+  /**
+   * Дата формирования
+   * @format date-time
+   */
+  date_formation?: string | null;
+  /**
+   * Дата завершения
+   * @format date-time
+   */
+  date_complete?: string | null;
+  /** Модератор */
+  moderator?: number | null;
+  /**
+   * Дата проводки
+   * @format date
+   */
+  date?: string | null;
+  /**
+   * Начальная точка проводки
+   * @minLength 1
+   */
+  start_point?: string | null;
+  /**
+   * Конечная точка проводки
+   * @minLength 1
+   */
+  finish_point?: string | null;
+  /** Результат проводки (0/1) */
+  result?: boolean | null;
+  /** Status */
+  status?: "DRAFT" | "DELETED" | "FORMED" | "COMPLETED" | "REJECTED";
+  /** Пользователь */
+  owner?: number;
+}
+
+export interface UpdateShipIcebreaker {
+  direction: "up" | "down";
   /**
    * Порядок
    * @min -2147483648
    * @max 2147483647
    */
   order?: number | null;
-  /** Корабль */
-  ship?: number;
-  /** Проводка */
-  icebreaker?: number;
 }
 
-export interface Login {
+export interface ShipIcebreaker {
+  /** Проводка */
+  icebreaker?: number;
+  /** Корабль */
+  ship?: number;
   /**
-   * Username
+   * Порядок
+   * @min -2147483648
+   * @max 2147483647
+   */
+  order?: number | null;
+}
+
+export interface ResolveIcebreaker {
+  /** ID */
+  id?: number;
+  /**
+   * Дата создания
+   * @format date-time
+   */
+  date_created?: string;
+  /**
+   * Дата формирования
+   * @format date-time
+   */
+  date_formation?: string | null;
+  /**
+   * Дата завершения
+   * @format date-time
+   */
+  date_complete?: string | null;
+  /** Модератор */
+  moderator?: number | null;
+  /**
+   * Дата проводки
+   * @format date
+   */
+  date?: string | null;
+  /**
+   * Начальная точка проводки
    * @minLength 1
    */
-  username: string;
+  start_point?: string | null;
   /**
-   * Password
+   * Конечная точка проводки
    * @minLength 1
    */
-  password: string;
+  finish_point?: string | null;
+  /** Результат проводки (0/1) */
+  result?: boolean | null;
+  /** Status */
+  status?: "DRAFT" | "DELETED" | "FORMED" | "COMPLETED" | "REJECTED";
+  /** Пользователь */
+  owner?: number;
+}
+
+export interface Ship {
+  /** ID */
+  id?: number;
+  /**
+   * Название
+   * @minLength 1
+   * @maxLength 100
+   */
+  ship_name: string;
+  /** Длина */
+  length?: number | null;
+  /**
+   * Год постройки
+   * @min -2147483648
+   * @max 2147483647
+   */
+  year?: number | null;
+  /**
+   * Ледовый класс
+   * @maxLength 10
+   */
+  ice_class?: string;
+  /**
+   * Двигатель
+   * @maxLength 255
+   */
+  engine?: string;
+  /** Изображение */
+  image?: string | null;
+  /** Описание */
+  description?: string;
+  /** Is active */
+  is_active?: boolean;
+}
+
+export interface GetShip {
+  ship: Ship[];
+  /** Icebreaker id */
+  icebreaker_id?: number | null;
+  /** Items in cart */
+  items_in_cart: number;
+}
+
+export interface UserLogin {
+  /**
+   * Staff status
+   * Designates whether the user can log into this admin site.
+   */
+  is_staff?: boolean;
 }
 
 export interface User {
@@ -154,6 +319,16 @@ export interface User {
    * @maxLength 128
    */
   password: string;
+}
+
+export interface UserUpdate {
+  /**
+   * Email
+   * @format email
+   */
+  email?: string;
+  /** Password */
+  password?: string;
 }
 
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
@@ -302,7 +477,7 @@ export class HttpClient<SecurityDataType = unknown> {
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   icebreakers = {
     /**
-     * No description
+     * @description Получение списка заявок на проводку кораблей
      *
      * @tags icebreakers
      * @name IcebreakersList
@@ -313,10 +488,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query?: {
         /** status */
         status?: string;
+        /**
+         * status
+         * @format date-time
+         */
+        formation_start?: string;
+        /**
+         * status
+         * @format date-time
+         */
+        formation_end?: string;
       },
       params: RequestParams = {},
     ) =>
-      this.request<Ship[], void>({
+      this.request<Icebreaker[], void>({
         path: `/icebreakers/`,
         method: "GET",
         query: query,
@@ -326,7 +511,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Получение заявки на проводку кораблей
      *
      * @tags icebreakers
      * @name IcebreakersRead
@@ -334,7 +519,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     icebreakersRead: (icebreakerId: string, params: RequestParams = {}) =>
-      this.request<Icebreaker, void>({
+      this.request<FullIcebreaker, void>({
         path: `/icebreakers/${icebreakerId}/`,
         method: "GET",
         secure: true,
@@ -343,7 +528,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Удаление заявки на проводку кораблей
      *
      * @tags icebreakers
      * @name IcebreakersDeleteDelete
@@ -359,7 +544,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Удаление корабәл из заявки на проводку
      *
      * @tags icebreakers
      * @name IcebreakersDeleteShipDelete
@@ -375,15 +560,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Изменение заявки на проводку кораблей
      *
      * @tags icebreakers
      * @name IcebreakersUpdateUpdate
      * @request PUT:/icebreakers/{icebreaker_id}/update/
      * @secure
      */
-    icebreakersUpdateUpdate: (icebreakerId: string, data: Icebreaker, params: RequestParams = {}) =>
-      this.request<Icebreaker, void>({
+    icebreakersUpdateUpdate: (icebreakerId: string, data: PutIcebreaker, params: RequestParams = {}) =>
+      this.request<PutIcebreaker, void>({
         path: `/icebreakers/${icebreakerId}/update/`,
         method: "PUT",
         body: data,
@@ -394,7 +579,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Изменение порядка кораблей в заявке
      *
      * @tags icebreakers
      * @name IcebreakersUpdateShipUpdate
@@ -404,7 +589,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     icebreakersUpdateShipUpdate: (
       icebreakerId: string,
       shipId: string,
-      data: ShipIcebreaker,
+      data: UpdateShipIcebreaker,
       params: RequestParams = {},
     ) =>
       this.request<ShipIcebreaker, void>({
@@ -418,24 +603,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Закрытие заявки на проводку кораблей модератором
      *
      * @tags icebreakers
      * @name IcebreakersUpdateStatusAdminUpdate
      * @request PUT:/icebreakers/{icebreaker_id}/update_status_admin/
      * @secure
      */
-    icebreakersUpdateStatusAdminUpdate: (icebreakerId: string, params: RequestParams = {}) =>
-      this.request<Icebreaker, void>({
+    icebreakersUpdateStatusAdminUpdate: (icebreakerId: string, data: ResolveIcebreaker, params: RequestParams = {}) =>
+      this.request<ResolveIcebreaker, void>({
         path: `/icebreakers/${icebreakerId}/update_status_admin/`,
         method: "PUT",
+        body: data,
         secure: true,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
 
     /**
-     * No description
+     * @description Формирование заявки на установку ПО
      *
      * @tags icebreakers
      * @name IcebreakersUpdateStatusUserUpdate
@@ -462,7 +649,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     shipsList: (
       query?: {
-        ship_name?: string;
+        /** ship_title */
+        ship_title?: string;
       },
       params: RequestParams = {},
     ) =>
@@ -471,11 +659,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "GET",
         query: query,
         secure: true,
+        format: "json",
         ...params,
       }),
 
     /**
-     * No description
+     * @description Создание ПО
      *
      * @tags ships
      * @name ShipsCreateCreate
@@ -493,7 +682,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Получение корабля
      *
      * @tags ships
      * @name ShipsRead
@@ -510,7 +699,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Добавление кораблә в заәвку на проводку
      *
      * @tags ships
      * @name ShipsAddToIcebreakerCreate
@@ -526,7 +715,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Удаление ПО
      *
      * @tags ships
      * @name ShipsDeleteDelete
@@ -542,7 +731,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Изменение корабля
      *
      * @tags ships
      * @name ShipsUpdateUpdate
@@ -596,13 +785,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/users/login/
      * @secure
      */
-    usersLoginCreate: (data: Login, params: RequestParams = {}) =>
-      this.request<void, void>({
+    usersLoginCreate: (
+      data: {
+        /** username */
+        username: string;
+        /** password */
+        password: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<UserLogin, void>({
         path: `/users/login/`,
         method: "POST",
         body: data,
         secure: true,
-        type: ContentType.Json,
+        type: ContentType.UrlEncoded,
+        format: "json",
         ...params,
       }),
 
@@ -623,7 +821,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Создание пользователя
      *
      * @tags users
      * @name UsersRegisterCreate
@@ -636,23 +834,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: data,
         secure: true,
+        type: ContentType.Json,
         ...params,
       }),
 
     /**
-     * No description
+     * @description Обновление данных пользователя
      *
      * @tags users
      * @name UsersUpdateUpdate
      * @request PUT:/users/{user_id}/update/
      * @secure
      */
-    usersUpdateUpdate: (userId: string, data: User, params: RequestParams = {}) =>
+    usersUpdateUpdate: (userId: string, data: UserUpdate, params: RequestParams = {}) =>
       this.request<User, void>({
         path: `/users/${userId}/update/`,
         method: "PUT",
         body: data,
         secure: true,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

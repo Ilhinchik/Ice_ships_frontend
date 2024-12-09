@@ -40,7 +40,7 @@ export const Navbar: FC = () => {
                 <Container>
                     <NavbarComp.Brand>
                         <Link to="/" className="text-white text-decoration-none">
-                            Установка ПО
+                            Проводка кораблей
                         </Link>
                     </NavbarComp.Brand>
                     <NavbarComp.Toggle
@@ -56,7 +56,7 @@ export const Navbar: FC = () => {
 
                         {isAuth ? (
                             <Nav className="me-3">
-                                <NavLink to="/ships_list"
+                                <NavLink to="/icebreakers_list"
                                          className="text-white text-decoration-none">
                                     Заявки
                                 </NavLink>

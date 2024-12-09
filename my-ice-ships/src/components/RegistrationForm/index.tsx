@@ -21,7 +21,7 @@ export const RegistrationForm = () => {
 
     const clickSignUp = () => {
         if (loginFormData.username && loginFormData.password) {
-            api.users.usersCreateCreate(loginFormData)
+            api.users.usersRegisterCreate(loginFormData)
                 .then(() => {
                     store.dispatch(
                         addNotification({

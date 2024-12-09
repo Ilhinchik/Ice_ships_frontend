@@ -4,11 +4,11 @@ import { ShipInIcebreakerCard } from "../../components/ShipInIcebreakerCard";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { useIcebreakerPage } from "./useIcebreakerPage";
 
-function calculateTotalPrice(shipItems?: any[]): number {
-    return shipItems?.reduce((total, item) => {
-        return total + (item.ship?.price || 0);
-    }, 0) || 0;
-}
+// function calculateTotalPrice(shipItems?: any[]): number {
+//     return shipItems?.reduce((total, item) => {
+//         return total + (item.ship?.price || 0);
+//     }, 0) || 0;
+// }
 
 export const IcebreakerPage = () => {
     const {
@@ -27,10 +27,10 @@ export const IcebreakerPage = () => {
                 middleItems={[
                     {
                         name: "Каталог",
-                        link: "/ship_catalog",
+                        link: "/ships_list",
                     },
                 ]}
-                endItem={`Заказ на установку ПО № ${IcebreakerData?.id}`}
+                endItem={`Заявка на проводку № ${IcebreakerData?.id}`}
             />
             {IcebreakerData?.ship_list?.length ? (
                 IcebreakerData.ship_list.map((ship, index) => (
@@ -45,29 +45,30 @@ export const IcebreakerPage = () => {
                         engine={ship.ship.engine}
                         isEditable={isEditable}
                         isrID={id || ""}
+                        order={ship.order}
                         handleClickDelete={handleClickDelete}
-                        handleUpdateVersion={updVersion}
+                        handleUpdateOrder={updVersion}
                     />
                 ))
             ) : (
                 <p>Нет данных для отображения.</p>
             )}
-            <div className="card mb-3">
+            {/* <div className="card mb-3">
                 <div className="row g-0">
                     <div className="col-md-10">
                         <div className="card-body">
                             <h5 className="card-title">ИТОГО:</h5>
                         </div>
                     </div>
-                    <div className="col-md-2">
+                    { <div className="col-md-2">
                         <div className="card-body">
                             <strong>{calculateTotalPrice(IcebreakerData?.ship_list)} руб.</strong>
                         </div>
-                    </div>
+                    </div> }
                 </div>
-            </div>
+            </div> */}
             {isEditable && (
-                <div className="d-flex justify-content-end">
+                <div className="d-flex  justify-content-center">
                     <button type="button" className="btn dark-blue-border me-3" onClick={handleClearClick}>
                         Очистить
                     </button>

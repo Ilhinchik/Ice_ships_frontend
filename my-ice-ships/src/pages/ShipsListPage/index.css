@@ -1,20 +1,20 @@
-.software-card-img {
+/* .software-card-img {
     width: 70%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-}
+} */
 
 .dark-blue-btn {
-    background-color: #202e3b;
+    background-color: #0D6AAD;
     color: #fff;
-    border-color: #202e3b;
+    border-color: #0D6AAD;
 }
 
 .dark-blue-btn:hover {
     background-color: #fff;
-    border-color: #202e3b;
-    color: #202e3b;
+    border-color: #0D6AAD;
+    color: #0D6AAD;
 }
 
 .not-found-alert {
@@ -22,8 +22,8 @@
 }
 
 .dark-blue-border {
-    border-color: #202e3b;
-    color: #202e3b;
+    border-color: #0D6AAD;
+    color: black;
 }
 
 .dark-blue-border:hover {
@@ -35,9 +35,6 @@
 .non-clickable {
     pointer-events: none;
     text-decoration: none;
-    background-color: #efefef;
-    border-color: #444;
-    color: #444;
 }
 
 .cart-button {

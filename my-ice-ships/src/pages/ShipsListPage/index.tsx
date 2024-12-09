@@ -60,15 +60,15 @@ export const ShipsListPage = () => {
                 isPageActive ?
                     <>
                         {shipList && !!shipList.length ? (
-                            <div className="row row-cols-1 row-cols-md-2
-                    row-cols-lg-4 g-4">
+                            <div className="row row-cols-1 row-cols-md-1
+                    row-cols-lg-2 g-4">
                                 {shipList.map((ship, index) => {
                                     const props: IShipCardProps = {
                                         id: ship.id || 0,
                                         ship_name: ship.ship_name,
                                         ice_class: ship.ice_class,
                                         length: ship.length,
-                                        logoFilePath: ship.image,
+                                        image: ship.image,
                                         engine: ship.engine,
                                         updateCatalogPageFunc: updateCatalogPageFunc,
                                     };

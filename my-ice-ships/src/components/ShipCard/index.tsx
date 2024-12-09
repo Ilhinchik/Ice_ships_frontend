@@ -16,7 +16,7 @@ export const ShipCard: FC<IShipCardProps> = (ship: IShipCardProps) => {
                 ship.updateCatalogPageFunc();
                 store.dispatch(
                     addNotification({
-                        message: "ПО добавлено в заявку на установку",
+                        message: "Корабль добавлен в заявку на установку",
                         isError: false,
                     })
                 );
@@ -25,7 +25,7 @@ export const ShipCard: FC<IShipCardProps> = (ship: IShipCardProps) => {
                     if (data.status == 400) {
                         store.dispatch(
                             addNotification({
-                                message: "ПО уже добавлено в заявку",
+                                message: "Корабль уже добавлен в заявку",
                                 isError: true,
                             })
                         );
@@ -42,22 +42,33 @@ export const ShipCard: FC<IShipCardProps> = (ship: IShipCardProps) => {
     };
 
     return (
-        <div className="card h-100">
+        <div className="row">
+        <div className="col-md-12 col-lg-12">
+        <div className="card ship-card">
+            <div className="row">
+            <div className="col-md-5"> 
             <img
-                src={ship.logoFilePath ? (ship.logoFilePath) : (unknownImage)}
+                src={ship.image ? (ship.image) : (unknownImage)}
                 className="card-img-top ship-card-img"
                 alt={ship.ship_name}
             />
+            </div>
+            <div className="col-md-7">
             <div className="card-body">
                 <h5 className="card-title">{ship.ship_name}</h5>
-                <p className="card-text">{ship.ice_class}</p>
-            </div>
-            <ul className="list-group list-group-flush">
-                <li className="list-group-item">
-                    Длина: <strong>{ship.length}</strong>
-                </li>
-            </ul>
-            <div className="card-footer d-flex justify-content-between">
+            
+                <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
+                            <strong>Длина:</strong> {ship.length} м
+                            
+                        </li>
+                        <li className="list-group-item">
+                            <strong>Ледовый класс:</strong> {ship.ice_class}
+                        </li>
+                        <li className="list-group-item">
+                            <strong>Двигатель:</strong> {ship.engine}
+                        </li>
+                    </ul>
                 <Link
                     to={"/ship/" + ship.id}
                     id={ship.ship_name}
@@ -79,6 +90,11 @@ export const ShipCard: FC<IShipCardProps> = (ship: IShipCardProps) => {
                         <></>
                 }
             </div>
+            </div>
+            </div>
+            </div>
         </div>
+        </div>
+        
     );
 };

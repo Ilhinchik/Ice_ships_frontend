@@ -8,6 +8,7 @@ export interface IShipInIcebreakerCardProps {
     isEditable: boolean;
     engine?: string | null;
     isrID: string;
+    order: number;
     handleClickDelete: (key: number) => void;
-    handleUpdateVersion: (key: number, value: string) => void;
+    handleUpdateOrder: (shipId: number, newOrder: string) => void;
 }

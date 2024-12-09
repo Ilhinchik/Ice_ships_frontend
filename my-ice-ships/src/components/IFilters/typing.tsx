@@ -7,5 +7,5 @@ export interface IFiltersProps {
     handleStatusChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     handleStartDateChange: (e: ChangeEvent) => void;
     handleEndDateChange: (e: ChangeEvent) => void;
-    handleFilterISRClick: (e: ClickEvent) => void;
+    handleFilterIClick: (e: ClickEvent) => void;
 }

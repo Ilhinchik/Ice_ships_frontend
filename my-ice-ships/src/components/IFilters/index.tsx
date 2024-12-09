@@ -43,7 +43,7 @@ export const IFilters: FC<IFiltersProps> = (props: IFiltersProps) => {
                             </Form.Group>
                         </div>
                         <Button
-                            onClick={props.handleFilterISRClick}
+                            onClick={props.handleFilterIClick}
                             className="btn dark-blue-btn"
                         >
                             Показать

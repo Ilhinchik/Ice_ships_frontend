@@ -2,14 +2,14 @@ import "./IcebreakerPage.css";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../core/api";
-import { Icebreaker } from "../../core/api/Api.ts";
-import { OIcebreaker as INSTALL_ICEBREAKER_MOCK } from "../../core/mock/Icebreaker.ts";
+import { FullIcebreaker, Icebreaker } from "../../core/api/Api.ts";
+import { OIcebreaker as ICEBREAKER_MOCK } from "../../core/mock/Icebreaker.ts";
 import { store } from "../../core/store";
 import { addNotification } from "../../core/store/slices/appSlice.ts";
 import axios from "axios";
 
 export const useIcebreakerPage = () => {
-    const [IcebreakerData, setIcebreakerData] = useState<Icebreaker | null>(null);
+    const [IcebreakerData, setIcebreakerData] = useState<FullIcebreaker | null>(null);
     const [isEditable, setIsEditable] = useState<boolean>(true);
     const [order, setOrder] = useState<number>();
     const [versions, setVersions] = useState<{ [key: number]: string }>({});
@@ -37,7 +37,7 @@ export const useIcebreakerPage = () => {
             api.icebreakers.icebreakersRead(id)
                 .then((data) => {
                     setIcebreakerData(data.data);
-                    setIsEditable(data.data?.status === 1);
+                    setIsEditable(data.data?.status === "DRAFT");
                     setOrder(data.data?.id);
                     if (data.data.ship_list) {
                         data.data.ship_list.forEach((ship: any) => {
@@ -46,7 +46,7 @@ export const useIcebreakerPage = () => {
                     }
                 })
                 .catch(() => {
-                    setIcebreakerData(INSTALL_ICEBREAKER_MOCK);
+                    setIcebreakerData(ICEBREAKER_MOCK);
                 });
         }
     };
@@ -62,7 +62,7 @@ export const useIcebreakerPage = () => {
                         isError: false,
                     })
                 );
-                navigate("/ship_catalog");
+                navigate("/ships_list");
             })
             .catch(() => {
                 store.dispatch(
@@ -85,7 +85,7 @@ export const useIcebreakerPage = () => {
                     throw new Error(`Invalid version value for shipId ${shipId}`);
                 }
             }
-            await api.icebreakers.icebreakersUpdateUpdate(id || "", { status: 2 }); // Пример с данными для обновления статуса
+            await api.icebreakers.icebreakersUpdateUpdate(id || "", { status: "FORMED" }); // Пример с данными для обновления статуса
             store.dispatch(
                 addNotification({
                     message: "Заявка успешно оформлена",

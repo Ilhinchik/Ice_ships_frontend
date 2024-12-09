@@ -4,6 +4,6 @@ export interface IShipCardProps {
     ice_class?: string;
     length?: number | null;
     engine?: string;
-    logoFilePath?: string;
+    image?: string | null;
     updateCatalogPageFunc: () => void;
 }

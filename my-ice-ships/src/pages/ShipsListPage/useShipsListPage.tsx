@@ -25,7 +25,7 @@ export const useShipsListPage = () => {
             .then((data) => {
                 setShipList(data.data.ship);
                 // dispatch(saveISRId(data.data.install_ship_request_id || 0))
-                setISRId(data.data.install_ship_request_id || 0)
+                setISRId(data.data.icebreaker_id || 0)
                 setItemsInCart(data.data?.items_in_cart || 0)
                 setIsPageActive(true)
             })
