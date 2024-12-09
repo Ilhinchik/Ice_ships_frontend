@@ -8,7 +8,7 @@ export interface INotification {
 }
 
 export interface IAppData {
-    searchShipTitle: string;
+    searchShipName: string;
     filterIStatus?: string;
     filterIStartDate?: string;
     filterIEndDate?: string;
@@ -16,7 +16,7 @@ export interface IAppData {
 }
 
 const initialState: IAppData = {
-    searchShipTitle: "",
+    searchShipName: "",
     filterIStatus: undefined,
     filterIStartDate: undefined,
     filterIEndDate: undefined,
@@ -28,13 +28,13 @@ export const appSlice = createSlice({
     initialState,
     reducers: {
         refreshApp: (state) => {
-            state.searchShipTitle = "";
+            state.searchShipName = "";
             state.filterIStatus = undefined;
             state.filterIStartDate = undefined;
             state.filterIEndDate = undefined;
         },
         saveSearchShipTitle: (state, action: PayloadAction<string>) => {
-            state.searchShipTitle = action.payload;
+            state.searchShipName = action.payload;
         },
         saveFilterIStatus: (state, action: PayloadAction<string>) => {
             state.filterIStatus = action.payload;

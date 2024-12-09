@@ -10,5 +10,5 @@ export interface IShipInIcebreakerCardProps {
     isrID: string;
     order: number;
     handleClickDelete: (key: number) => void;
-    handleUpdateOrder: (shipId: number, newOrder: string) => void;
+    handleUpdateOrder: (shipId: number, direction: "up" | "down") => void;
 }

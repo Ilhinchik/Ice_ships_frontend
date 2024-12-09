@@ -16,6 +16,36 @@ export const useIcebreakerPage = () => {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
 
+    const moveCard = (shipId: number, direction: "up" | "down") => {
+        setIcebreakerData((prevState) => {
+            if (!prevState) return prevState;
+    
+            const updatedShipList = [...prevState.ship_list];
+            const index = updatedShipList.findIndex((ship) => ship.ship.id === shipId);
+    
+            if (index === -1) return prevState; // Если элемент не найден, возвращаем текущее состояние
+    
+            // Вычисляем новый индекс на основе направления
+            const newIndex = direction === "up" ? index - 1 : index + 1;
+    
+            // Проверяем, что новый индекс в пределах массива
+            if (newIndex < 0 || newIndex >= updatedShipList.length) return prevState;
+    
+            // Меняем элементы местами
+            [updatedShipList[index], updatedShipList[newIndex]] = [updatedShipList[newIndex], updatedShipList[index]];
+    
+            // Обновляем порядок
+            updatedShipList.forEach((ship, idx) => {
+                ship.order = idx + 1;
+            });
+    
+            return {
+                ...prevState,
+                ship_list: updatedShipList,
+            };
+        });
+    };
+
     const handleClickDelete = (key: number) => {
         setVersions(prevVersions => {
             const newVersions = { ...prevVersions };
@@ -92,7 +122,7 @@ export const useIcebreakerPage = () => {
                     isError: false,
                 })
             );
-            navigate("/install_ship_requests_list");
+            navigate("/icebreakers_list");
         } catch (error) {
             store.dispatch(
                 addNotification({
@@ -139,5 +169,7 @@ export const useIcebreakerPage = () => {
         handleClickDelete,
         handleClearClick,
         handleFormClick,
+        moveCard
+        
     };
 };

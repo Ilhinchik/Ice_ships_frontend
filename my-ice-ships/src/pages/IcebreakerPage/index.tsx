@@ -19,6 +19,7 @@ export const IcebreakerPage = () => {
         handleClickDelete,
         handleClearClick,
         handleFormClick,
+        moveCard
     } = useIcebreakerPage();
 
     return (
@@ -38,16 +39,14 @@ export const IcebreakerPage = () => {
                         key={index}
                         id={ship.ship.id}
                         ship_name={ship.ship.ship_name}
-                        year={ship.ship.year}
                         ice_class={ship.ship.ice_class}
                         logoFilePath={ship.ship.image}
                         length={ship.ship.length}
-                        engine={ship.ship.engine}
                         isEditable={isEditable}
                         isrID={id || ""}
                         order={ship.order}
                         handleClickDelete={handleClickDelete}
-                        handleUpdateOrder={updVersion}
+                        handleUpdateOrder={moveCard}
                     />
                 ))
             ) : (

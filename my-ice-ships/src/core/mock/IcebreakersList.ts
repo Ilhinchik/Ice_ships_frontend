@@ -3,7 +3,7 @@ import { Icebreaker } from "../api/Api.ts";
 export const IcebreakersList: Icebreaker[] = [
   {
     id: 1,
-    status: 1,
+    status: "DRAFT",
     date_created: "2024-10-20T15:07:21.219Z",
     date_formation: "2024-10-20T15:07:21.219Z",
     date_complete: "2024-10-20T15:07:21.219Z",
@@ -16,7 +16,7 @@ export const IcebreakersList: Icebreaker[] = [
   },
   {
     id: 2,
-    status: 4,
+    status: "REJECTED",
     date_created: "2024-10-20T15:07:21.219Z",
     date_formation: "2024-10-20T15:07:21.219Z",
     date_complete: "2024-10-20T15:07:21.219Z",
@@ -29,7 +29,7 @@ export const IcebreakersList: Icebreaker[] = [
   },
   {
     id: 3,
-    status: 2,
+    status: "FORMED",
     date_created: "2024-10-20T15:07:21.219Z",
     date_formation: "2024-10-20T15:07:21.219Z",
     date_complete: "2024-10-20T15:07:21.219Z",
@@ -42,7 +42,7 @@ export const IcebreakersList: Icebreaker[] = [
   },
   {
     id: 4,
-    status: 1,
+    status: "DRAFT",
     date_created: "2024-10-20T15:07:21.219Z",
     date_formation: "2024-10-20T15:07:21.219Z",
     date_complete: "2024-10-20T15:07:21.219Z",
@@ -55,7 +55,7 @@ export const IcebreakersList: Icebreaker[] = [
   },
   {
     id: 5,
-    status: 1,
+    status: "DRAFT",
     date_created: "2024-10-20T15:07:21.219Z",
     date_formation: "2024-10-20T15:07:21.219Z",
     date_complete: "2024-10-20T15:07:21.219Z",
@@ -68,7 +68,7 @@ export const IcebreakersList: Icebreaker[] = [
   },
   {
     id: 6,
-    status: 5,
+    status: "DELETED",
     date_created: "2024-10-20T15:07:21.219Z",
     date_formation: "2024-10-20T15:07:21.219Z",
     date_complete: "2024-10-20T15:07:21.219Z",
@@ -81,7 +81,7 @@ export const IcebreakersList: Icebreaker[] = [
   },
   {
     id: 7,
-    status: 1,
+    status: "DRAFT",
     date_created: "2024-10-20T15:07:21.219Z",
     date_formation: "2024-10-20T15:07:21.219Z",
     date_complete: "2024-10-20T15:07:21.219Z",
@@ -94,7 +94,7 @@ export const IcebreakersList: Icebreaker[] = [
   },
   {
     id: 8,
-    status: 2,
+    status: "FORMED",
     date_created: "2024-10-20T15:07:21.219Z",
     date_formation: "2024-10-20T15:07:21.219Z",
     date_complete: "2024-10-20T15:07:21.219Z",
@@ -107,7 +107,7 @@ export const IcebreakersList: Icebreaker[] = [
   },
   {
     id: 9,
-    status: 1,
+    status: "DRAFT",
     date_created: "2024-10-20T15:07:21.219Z",
     date_formation: "2024-10-20T15:07:21.219Z",
     date_complete: "2024-10-20T15:07:21.219Z",
@@ -120,7 +120,7 @@ export const IcebreakersList: Icebreaker[] = [
   },
   {
     id: 10,
-    status: 1,
+    status: "DRAFT",
     date_created: "2024-10-20T15:07:21.219Z",
     date_formation: "2024-10-20T15:07:21.219Z",
     date_complete: "2024-10-20T15:07:21.219Z",

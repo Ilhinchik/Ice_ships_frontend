@@ -22,7 +22,7 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
                 })
             );
             // Обновляем данные после изменения порядка
-            ship.handleUpdateOrder(ship.id!, "up");
+            ship.handleUpdateOrder(ship.id!, direction);
         })
         .catch(() => {
             store.dispatch(
@@ -99,7 +99,6 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
                             type="button"
                             className="btn btn-sm btn-outline-primary"
                             onClick={() => handleOrderChange("up")}
-                            disabled={ship.order === 1} // Блокируем кнопку, если это первый корабль
                         >
                             ⬆ Вверх
                         </button>

@@ -82,7 +82,7 @@ export interface ShipForIcebreaker {
 }
 
 export interface Related {
-  software: ShipForIcebreaker;
+  ship: ShipForIcebreaker;
   /**
    * Order
    * @min -2147483648
@@ -133,7 +133,7 @@ export interface FullIcebreaker {
   /** Пользователь */
   owner?: number;
   /** Ship list */
-  ship_list?: string;
+  ship_list?: Related[];
 }
 
 export interface PutIcebreaker {
@@ -649,8 +649,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     shipsList: (
       query?: {
-        /** ship_title */
-        ship_title?: string;
+        /** ship_name */
+        ship_name?: string;
       },
       params: RequestParams = {},
     ) =>

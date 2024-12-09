@@ -16,12 +16,12 @@ export const useShipsListPage = () => {
     const [itemsInCart, setItemsInCart] = useState<number>(0);
     const [isPageActive, setIsPageActive] = useState(false);
     const [ISRId, setISRId] = useState(1);
-    const {searchShipTitle} = useSelector(selectApp);
+    const {searchShipName} = useSelector(selectApp);
     const dispatch = useDispatch();
 
     const handleSearchShipClick = () => {
         setIsPageActive(false)
-        api.ships.shipsList({ship_name: searchShipTitle})
+        api.ships.shipsList({ship_name: searchShipName})
             .then((data) => {
                 setShipList(data.data.ship);
                 // dispatch(saveISRId(data.data.install_ship_request_id || 0))
@@ -31,7 +31,7 @@ export const useShipsListPage = () => {
             })
             .catch(() => {
                 const filteredShip = SOFTWARE_LIST_MOCK.filter((ship) =>
-                    ship.ship_name.toLowerCase().startsWith(searchShipTitle.toLowerCase())
+                    ship.ship_name.toLowerCase().startsWith(searchShipName.toLowerCase())
                 );
                 setShipList(filteredShip);
                 setISRId(1)
@@ -52,7 +52,7 @@ export const useShipsListPage = () => {
         shipList,
         ISRId,
         itemsInCart,
-        searchShipTitle,
+        searchShipName,
         isPageActive,
         updateCatalogPageFunc: handleSearchShipClick,
         handleSearchShipClick,

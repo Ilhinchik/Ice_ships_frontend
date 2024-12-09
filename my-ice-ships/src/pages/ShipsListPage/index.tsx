@@ -14,7 +14,7 @@ export const ShipsListPage = () => {
         shipList,
         ISRId,
         itemsInCart,
-        searchShipTitle,
+        searchShipName,
         isPageActive,
         updateCatalogPageFunc,
         handleSearchShipClick,
@@ -34,7 +34,7 @@ export const ShipsListPage = () => {
                         onChange={handleSearchNameChange}
                         placeholder="Поиск"
                         aria-label="Поиск"
-                        value={searchShipTitle}
+                        value={searchShipName}
                     />
                 </div>
                 <div className="px-3">
@@ -74,9 +74,9 @@ export const ShipsListPage = () => {
                                     };
 
                                     return (
-                                        <div className="col">
-                                            <ShipCard key={index} {...props} />
-                                        </div>
+                                        <div className="col" key={ship.id || Math.random()}>
+                                            <ShipCard {...props} />
+                                        </div>  
                                     );
                                 })}
                             </div>
