@@ -19,7 +19,13 @@ export const IcebreakerPage = () => {
         handleClickDelete,
         handleClearClick,
         handleFormClick,
-        moveCard
+        moveCard,
+        date,
+        setDate,
+        start_point,
+        setstart_point,
+        finish_point,
+        setfinish_point
     } = useIcebreakerPage();
 
     return (
@@ -33,6 +39,43 @@ export const IcebreakerPage = () => {
                 ]}
                 endItem={`Заявка на проводку № ${IcebreakerData?.id}`}
             />
+            <h2 className="mb-4">ЗАЯВКА № {IcebreakerData?.id}</h2>
+            
+            {/* Форма для ввода даты и точек */}
+            <div className="column justify-content-center mb-3">
+    <div className="col-12 col-md-4 offset-md-4">
+        <label htmlFor="date" className="form-label">Дата:</label>
+        <input
+            type="date"
+            id="date"
+            className="form-control form-control-sm"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+        />
+    </div>
+    <div className="col-12 col-md-4 offset-md-4">
+        <label htmlFor="start_point" className="form-label">Начальная точка:</label>
+        <input
+            type="text"
+            id="start_point"
+            className="form-control form-control-sm"
+            value={start_point}
+            onChange={(e) => setstart_point(e.target.value)}
+        />
+    </div>
+    <div className="col-12 col-md-4 offset-md-4">
+        <label htmlFor="finish_point" className="form-label">Конечная точка:</label>
+        <input
+            type="text"
+            id="finish_point"
+            className="form-control form-control-sm"
+            value={finish_point}
+            onChange={(e) => setfinish_point(e.target.value)}
+        />
+    </div>
+</div>
+<h5>Корабли в заявке</h5>
+
             {IcebreakerData?.ship_list?.length ? (
                 IcebreakerData.ship_list.map((ship, index) => (
                     <ShipInIcebreakerCard
@@ -52,22 +95,9 @@ export const IcebreakerPage = () => {
             ) : (
                 <p>Нет данных для отображения.</p>
             )}
-            {/* <div className="card mb-3">
-                <div className="row g-0">
-                    <div className="col-md-10">
-                        <div className="card-body">
-                            <h5 className="card-title">ИТОГО:</h5>
-                        </div>
-                    </div>
-                    { <div className="col-md-2">
-                        <div className="card-body">
-                            <strong>{calculateTotalPrice(IcebreakerData?.ship_list)} руб.</strong>
-                        </div>
-                    </div> }
-                </div>
-            </div> */}
+            
             {isEditable && (
-                <div className="d-flex  justify-content-center">
+                <div className="d-flex justify-content-center">
                     <button type="button" className="btn dark-blue-border me-3" onClick={handleClearClick}>
                         Очистить
                     </button>

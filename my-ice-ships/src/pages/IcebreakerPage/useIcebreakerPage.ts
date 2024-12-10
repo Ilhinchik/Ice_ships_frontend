@@ -16,6 +16,10 @@ export const useIcebreakerPage = () => {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
 
+    const [date, setDate] = useState<string>('');  // Добавили состояние для даты
+    const [start_point, setstart_point] = useState<string>('');  // Добавили состояние для начальной точки
+    const [finish_point, setfinish_point] = useState<string>('');  // Добавили состояние для конечной точки
+
     const moveCard = (shipId: number, direction: "up" | "down") => {
         setIcebreakerData((prevState) => {
             if (!prevState) return prevState;
@@ -106,16 +110,16 @@ export const useIcebreakerPage = () => {
 
     const formISR = async () => {
         try {
-            for (const [shipId, version] of Object.entries(versions)) {
-                // Преобразуем строку в число, если version является строкой
-                const order = Number(version);  // Преобразуем в число
-                if (!isNaN(order)) {  // Проверяем, что это действительно число
-                    await api.icebreakers.icebreakersUpdateShipUpdate(id || "", shipId, { order });
-                } else {
-                    throw new Error(`Invalid version value for shipId ${shipId}`);
-                }
-            }
-            await api.icebreakers.icebreakersUpdateUpdate(id || "", { status: "FORMED" }); // Пример с данными для обновления статуса
+            // Обновление даты, начальной и конечной точки
+            await api.icebreakers.icebreakersUpdateUpdate(id || "", {
+                date,
+                start_point,
+                finish_point,
+            });
+
+            // Обновление статуса заявки
+            await api.icebreakers.icebreakersUpdateUpdate(id || "", { status: "FORMED" });
+
             store.dispatch(
                 addNotification({
                     message: "Заявка успешно оформлена",
@@ -126,35 +130,13 @@ export const useIcebreakerPage = () => {
         } catch (error) {
             store.dispatch(
                 addNotification({
-                    message: "Ошибка оформления заявки",
+                    message: "Ошибка оформления заявки. Заполните все поля",
                     isError: true,
                 })
             );
         }
     };
     
-    // const formISR = async () => {
-    //     try {
-    //         for (const [shipId, value] of Object.entries(versions)) {
-    //             await api.icebreakers.icebreakersUpdateShipUpdate(id || "", shipId, { order: value });
-    //         }
-    //         await api.icebreakers.icebreakersUpdateUpdate(id || "", { status: 2 });
-    //         store.dispatch(
-    //             addNotification({
-    //                 message: "Заявка успешно оформлена",
-    //                 isError: false,
-    //             })
-    //         );
-    //         navigate("/install_ship_requests_list");
-    //     } catch (error) {
-    //         store.dispatch(
-    //             addNotification({
-    //                 message: "Ошибка оформления заявки",
-    //                 isError: true,
-    //             })
-    //         );
-    //     }
-    // };
 
     const handleFormClick = () => {
         formISR();
@@ -163,13 +145,19 @@ export const useIcebreakerPage = () => {
     return {
         IcebreakerData,
         isEditable,
-        order,
+        date,
+        setDate,
+        start_point,
+        setstart_point,
+        finish_point,
+        setfinish_point,
         id,
         updVersion,
         handleClickDelete,
         handleClearClick,
-        handleFormClick,
-        moveCard
+        formISR,
+        moveCard,
+        handleFormClick
         
     };
 };

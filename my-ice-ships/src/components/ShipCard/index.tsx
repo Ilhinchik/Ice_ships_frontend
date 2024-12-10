@@ -55,13 +55,10 @@ export const ShipCard: FC<IShipCardProps> = (ship: IShipCardProps) => {
             </div>
             <div className="col-md-7">
             <div className="card-body">
-                <h5 className="card-title">{ship.ship_name}</h5>
+                <h4 className="card-title">{ship.ship_name}</h4>
             
                 <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
-                            <strong>Длина:</strong> {ship.length} м
-                            
-                        </li>
+                    <li className="list-group-item"></li>
                         <li className="list-group-item">
                             <strong>Ледовый класс:</strong> {ship.ice_class}
                         </li>
@@ -72,7 +69,7 @@ export const ShipCard: FC<IShipCardProps> = (ship: IShipCardProps) => {
                 <Link
                     to={"/ship/" + ship.id}
                     id={ship.ship_name}
-                    className="btn dark-blue-btn"
+                    className="btn dark-blue-btn me-2"
                     state={{from: ship.ship_name}}
                 >
                     Узнать подробнее

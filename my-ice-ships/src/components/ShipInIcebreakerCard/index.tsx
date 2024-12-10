@@ -69,7 +69,7 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
 
     return (
         <div className="row justify-content-center mb-3">
-            <div className="card col-md-8">
+            <div className="card col-md-8 position-relative">
                 <div className="row g-0">
                     <div className="col-md-4 card-body">
                         <img
@@ -97,20 +97,20 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
                     <div className="col-md-2 card-body d-flex flex-column align-items-center justify-content-around">
                         <button
                             type="button"
-                            className="btn btn-sm btn-outline-primary"
+                            className="btn dark-blue-btn mb-2"
                             onClick={() => handleOrderChange("up")}
                         >
                             ⬆ Вверх
                         </button>
                         <button
                             type="button"
-                            className="btn btn-sm btn-outline-primary"
+                            className="btn dark-blue-btn"
                             onClick={() => handleOrderChange("down")}
                         >
                             ⬇ Вниз
                         </button>
                     </div>
-                    <div className="col-md-1 card-body close-col">
+                    <div className="col-md-1 card-body position-absolute top-0 end-0 ">
                         <button
                             type="button"
                             className="btn-close mt-1"

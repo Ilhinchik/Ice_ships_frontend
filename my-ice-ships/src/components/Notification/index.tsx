@@ -14,7 +14,7 @@ export const Notification: React.FC<NotificationBarProps> = ({notifyInfo,}) => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             dispatch(deleteNotification(notifyInfo.id));
-        }, 2000);
+        }, 1000);
         return () => clearTimeout(timeout);
     }, [dispatch, notifyInfo]);
 

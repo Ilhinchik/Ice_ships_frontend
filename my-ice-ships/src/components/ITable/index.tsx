@@ -35,7 +35,7 @@ export const ITable: FC<ITableProps> = (props: ITableProps) => {
                         <Row className="d-flex align-items-center">
                             <Col xs={12} sm={3}>
                                 <Card.Text>
-                                    <Link to={"/install_software_request/" + row.number} className="text-black">
+                                    <Link to={"/icebreaker/" + row.number} className="text-black">
                                         {row.number}
                                     </Link>
                                 </Card.Text>

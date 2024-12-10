@@ -23,12 +23,12 @@
 
 .dark-blue-border {
     border-color: #0D6AAD;
-    color: black;
+    color: 0D6AAD;
 }
 
 .dark-blue-border:hover {
-    border-color: #202e3b;
-    background-color: #202e3b;
+    border-color: #0D6AAD;
+    background-color: #0D6AAD;
     color: #ffffff;
 }
 
@@ -39,4 +39,25 @@
 
 .cart-button {
     min-width: 65px;
+}
+
+/* Стиль для кнопки корзины */
+.cart-button {
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход для фона и цвета */
+}
+
+/* Когда кнопка в состоянии hover, фон становится голубым, а цвет текста - белым */
+.cart-button:hover {
+    background-color: #0D6AAD; /* Голубой фон */
+    color: #fff; /* Белый текст */
+}
+
+/* Для картинки корзины */
+.cart-button img {
+    transition: filter 0.3s ease; /* Плавный переход для картинки */
+}
+
+/* При наведении на кнопку корзины, изображение становится белым */
+.cart-button:hover img {
+    filter: brightness(0) invert(1); /* Белая иконка корзины */
 }
