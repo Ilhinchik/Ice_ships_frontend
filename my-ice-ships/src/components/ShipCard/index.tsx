@@ -6,6 +6,7 @@ import {store, useSelector} from "../../core/store";
 import {selectUser} from "../../core/store/slices/selectors.ts";
 import {api} from "../../core/api";
 import {addNotification} from "../../core/store/slices/appSlice.ts";
+import "./index.css"
 
 export const ShipCard: FC<IShipCardProps> = (ship: IShipCardProps) => {
     const {isAuth} = useSelector(selectUser);

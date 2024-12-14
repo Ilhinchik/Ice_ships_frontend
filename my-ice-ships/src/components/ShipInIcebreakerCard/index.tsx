@@ -8,8 +8,7 @@ import {store} from "../../core/store";
 import {addNotification} from "../../core/store/slices/appSlice.ts";
 
 export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShipInIcebreakerCardProps) => {
-    const [order, setOrder] = useState<number>();
-
+    
     const handleOrderChange = (direction: "up" | "down") => {
         api.icebreakers.icebreakersUpdateShipUpdate(ship.isrID, ship.id?.toString() || "", {
             direction: direction,
@@ -34,15 +33,6 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
         });
     };
 
-    // const handleChangeVersion = (e: ChangeEvent) => {
-    //     setOrder(e.target.value)
-    //     ship.handleUpdateVersion(ship.id || 0, e.target.value)
-    // };
-
-    // useEffect(() => {
-    //     setVersion(ship.version)
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [])
 
     const handleDeleteClick = () => {
         api.icebreakers.icebreakersDeleteShipDelete(ship.isrID, ship.id?.toString() || "")
@@ -94,7 +84,9 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
                         <p className="card-text"><strong>Длина: </strong>{ship.length} м</p>
                         
                     </div>
-                    <div className="col-md-2 card-body d-flex flex-column align-items-center justify-content-around">
+                    {ship.isEditable && (
+                        <>
+                        <div className="col-md-2 card-body d-flex flex-column align-items-center justify-content-around">
                         <button
                             type="button"
                             className="btn dark-blue-btn mb-2"
@@ -118,6 +110,10 @@ export const ShipInIcebreakerCard: FC<IShipInIcebreakerCardProps> = (ship: IShip
                             onClick={handleDeleteClick}
                         ></button>
                     </div>
+                    </>
+                
+            )}
+                    
                 </div>
             </div>
         </div>

@@ -4,18 +4,12 @@ import { ShipInIcebreakerCard } from "../../components/ShipInIcebreakerCard";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { useIcebreakerPage } from "./useIcebreakerPage";
 
-// function calculateTotalPrice(shipItems?: any[]): number {
-//     return shipItems?.reduce((total, item) => {
-//         return total + (item.ship?.price || 0);
-//     }, 0) || 0;
-// }
 
 export const IcebreakerPage = () => {
     const {
         IcebreakerData,
         isEditable,
         id,
-        updVersion,
         handleClickDelete,
         handleClearClick,
         handleFormClick,
@@ -41,8 +35,23 @@ export const IcebreakerPage = () => {
             />
             <h2 className="mb-4">ЗАЯВКА № {IcebreakerData?.id}</h2>
             
-            {/* Форма для ввода даты и точек */}
+            
             <div className="column justify-content-center mb-3">
+            {!isEditable && (
+                <>
+                <div className="col-12 col-md-4 offset-md-4">
+                <h5 id="date" className="form-control-plaintext">Дата проводки: {IcebreakerData?.date ? new Date(IcebreakerData.date).toLocaleDateString("ru-RU") : "Дата не указана"}</h5>
+            </div>
+            <div className="col-12 col-md-4 offset-md-4">
+                <h5 id="start_point" className="form-control-plaintext">Начальная точка проводки: {IcebreakerData?.start_point}</h5>
+            </div>
+            <div className="col-12 col-md-4 offset-md-4">
+                <h5 id="finish_point" className="form-control-plaintext">Конечная точка проводки: {IcebreakerData?.finish_point}</h5>
+            </div>
+                </>
+            )}
+            {isEditable && (
+                <>
     <div className="col-12 col-md-4 offset-md-4">
         <label htmlFor="date" className="form-label">Дата:</label>
         <input
@@ -73,8 +82,12 @@ export const IcebreakerPage = () => {
             onChange={(e) => setfinish_point(e.target.value)}
         />
     </div>
+    </>
+    )}
 </div>
-<h5>Корабли в заявке</h5>
+
+
+<h4>Корабли в заявке</h4>
 
             {IcebreakerData?.ship_list?.length ? (
                 IcebreakerData.ship_list.map((ship, index) => (

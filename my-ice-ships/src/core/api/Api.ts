@@ -846,9 +846,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/users/{user_id}/update/
      * @secure
      */
-    usersUpdateUpdate: (userId: string, data: UserUpdate, params: RequestParams = {}) =>
+    usersUpdateUpdate: (data: UserUpdate, params: RequestParams = {}) =>
       this.request<User, void>({
-        path: `/users/${userId}/update/`,
+        path: `/users/update/`,
         method: "PUT",
         body: data,
         secure: true,

@@ -118,7 +118,7 @@ export const useIcebreakerPage = () => {
             });
 
             // Обновление статуса заявки
-            await api.icebreakers.icebreakersUpdateUpdate(id || "", { status: "FORMED" });
+            await api.icebreakers.icebreakersUpdateStatusUserUpdate(id || "");
 
             store.dispatch(
                 addNotification({
