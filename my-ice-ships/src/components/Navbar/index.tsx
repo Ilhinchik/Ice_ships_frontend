@@ -12,8 +12,9 @@ import {addNotification} from "../../core/store/slices/appSlice.ts";
 import {USER_NAME} from "../../env.tsx";
 
 export const Navbar: FC = () => {
-    const {isAuth, username} = useSelector(selectUser);
-
+    const {username} = useSelector(selectUser);
+    const isAuth = username != ""
+    const {isManager} = useSelector(selectUser);
     const dispatch = useDispatch();
 
     const logout = () => {
@@ -59,6 +60,16 @@ export const Navbar: FC = () => {
                                 <NavLink to="/icebreakers_list"
                                          className="text-white text-decoration-none">
                                     Заявки
+                                </NavLink>
+                            </Nav>
+                        ) : (
+                            <></>
+                        )}
+                        {isManager ? (
+                            <Nav className="me-3">
+                                <NavLink to="/ship_list"
+                                         className="text-white text-decoration-none">
+                                    Список кораблей
                                 </NavLink>
                             </Nav>
                         ) : (

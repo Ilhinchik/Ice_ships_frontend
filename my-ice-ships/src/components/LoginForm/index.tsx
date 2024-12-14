@@ -26,35 +26,38 @@ export const LoginForm = () => {
     const clickLogIn = () => {
         if (loginFormData.username && loginFormData.password) {
             api.users.usersLoginCreate(loginFormData)
-                .then(() => {
-                    dispatch(saveUser({username: loginFormData.username, isAuth: true}))
-                    localStorage.setItem(USER_NAME, loginFormData.username);
+            .then((data) => {
+                dispatch(saveUser(
+                    {
+                        username: loginFormData.username,
+                        isManager: data.data.is_staff || false,
+                    }))
+                store.dispatch(
+                    addNotification({
+                        message: "Добро пожаловать!",
+                        isError: false,
+                    })
+                );
+                navigate('/');
+            })
+            .catch((data) => {
+                if (data.status == 400) {
                     store.dispatch(
                         addNotification({
-                            message: "Добро пожаловать!",
-                            isError: false,
+                            message: "Неверный логин или пароль",
+                            isError: true,
                         })
                     );
-                    navigate('/');
-                })
-                .catch((data) => {
-                    if (data.status == 400) {
-                        store.dispatch(
-                            addNotification({
-                                message: "Неверный логин или пароль",
-                                isError: true,
-                            })
-                        );
-                    } else {
-                        store.dispatch(
-                            addNotification({
-                                message: "Ошибка сервера",
-                                isError: true,
-                            })
-                        );
-                    }
-                });
-        }
+                } else {
+                    store.dispatch(
+                        addNotification({
+                            message: "Ошибка сервера",
+                            isError: true,
+                        })
+                    );
+                }
+            });
+    }
     }
 
     return (

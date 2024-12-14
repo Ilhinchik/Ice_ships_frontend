@@ -1,18 +1,18 @@
 import {FC} from "react";
 import {Navigate, Outlet, useLocation} from "react-router-dom";
-import {IPrivatePageFirewallProps} from "./typing";
+import {IManagerPageFirewallProps} from "./typing";
 import {useSelector} from "../../core/store";
 import {selectUser} from "../../core/store/slices/selectors";
 
-export const PrivatePageFirewall: FC<IPrivatePageFirewallProps> = (props) => {
+export const ManagerPageFirewall: FC<IManagerPageFirewallProps> = (props) => {
     const {children} = props;
-    const {isAuth} = useSelector(selectUser);
+    const {isManager} = useSelector(selectUser);
     const location = useLocation();
 
-    if (!isAuth) {
+    if (!isManager) {
         return (
             <Navigate
-                to="/login"
+                to="/forbidden"
                 state={{
                     from: location.pathname,
                 }}

@@ -9,7 +9,9 @@ import {addNotification} from "../../core/store/slices/appSlice.ts";
 import "./index.css"
 
 export const ShipCard: FC<IShipCardProps> = (ship: IShipCardProps) => {
-    const {isAuth} = useSelector(selectUser);
+    const {username} = useSelector(selectUser);
+
+    const isAuth = username != ""
 
     const clickAddItem = () => {
         api.ships.shipsAddToIcebreakerCreate(ship.id.toString())

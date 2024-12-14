@@ -9,6 +9,8 @@ export interface INotification {
 
 export interface IAppData {
     searchShipName: string;
+    searchInListShipTitle: string;
+    filterISRAuthor?: string;
     filterIStatus?: string;
     filterIStartDate?: string;
     filterIEndDate?: string;
@@ -17,6 +19,8 @@ export interface IAppData {
 
 const initialState: IAppData = {
     searchShipName: "",
+    searchInListShipTitle: "",
+    filterISRAuthor: undefined,
     filterIStatus: undefined,
     filterIStartDate: undefined,
     filterIEndDate: undefined,
@@ -35,6 +39,12 @@ export const appSlice = createSlice({
         },
         saveSearchShipTitle: (state, action: PayloadAction<string>) => {
             state.searchShipName = action.payload;
+        },
+        saveSearchInListShipTitle: (state, action: PayloadAction<string>) => {
+            state.searchInListShipTitle = action.payload;
+        },
+        saveFilterISRAuthor: (state, action: PayloadAction<string>) => {
+            state.filterISRAuthor = action.payload;
         },
         saveFilterIStatus: (state, action: PayloadAction<string>) => {
             state.filterIStatus = action.payload;
@@ -66,6 +76,8 @@ export const appSlice = createSlice({
 export const {
     refreshApp,
     saveSearchShipTitle,
+    saveSearchInListShipTitle,
+    saveFilterISRAuthor,
     saveFilterIStatus,
     saveFilterIStartDate,
     saveFilterIEndDate,

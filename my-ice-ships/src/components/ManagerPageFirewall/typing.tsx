@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
 
-export interface IPrivatePageFirewallProps {
+export interface IManagerPageFirewallProps {
   children?: ReactNode;
 }

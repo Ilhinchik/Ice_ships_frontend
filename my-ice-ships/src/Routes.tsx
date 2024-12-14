@@ -8,16 +8,20 @@ import {LoginPage} from "./pages/LoginPage";
 import {UserAccountPage} from "./pages/UserAccountPage";
 import {IcebreakersListPage} from "./pages/IcebreakersListPage";
 import {MainLayout} from "./components/MainLayout";
-import {PrivatePageFirewall} from "./components/PrivatePageFirewall";
+import {NotFoundPage} from "./pages/NotFoundPage";
+import {ForbiddenPage} from "./pages/ForbiddenPage";
+import {ManagerPageFirewall} from "./components/ManagerPageFirewall";
+import {ShipEditPage} from "./pages/ShipEditPage";
+import {ShipListPage} from "./pages/ShipListPage";
+
 
 export const AppRoutes = () => {
     const routes: RouteObject[] = [
         {
             element: <MainLayout/>,
             children: [
-                {
-                    element: <PrivatePageFirewall/>,
-                    children: [
+                
+
                         {
                             path: "/icebreaker/:id",
                             element: <IcebreakerPage/>,
@@ -26,8 +30,25 @@ export const AppRoutes = () => {
                             path: "/icebreakers_list",
                             element: <IcebreakersListPage/>,
                         },
-                    ],
-                },
+                        {
+                            element: <ManagerPageFirewall/>,
+                            children: [
+                                {
+                                    path: "/edit_ship/:id",
+                                    element: <ShipEditPage/>,
+                                },
+                                {
+                                    path: "/add_ship",
+                                    element: <ShipEditPage/>,
+                                },
+                                {
+                                    path: "/ship_list",
+                                    element: <ShipListPage/>,
+                                },
+                            ],
+                        },
+                    
+                
                 {
                     path: "/",
                     element: <HomePage/>,
@@ -51,6 +72,14 @@ export const AppRoutes = () => {
                 {
                     path: "/user_account",
                     element: <UserAccountPage/>,
+                },
+                {
+                    path: "/forbidden",
+                    element: <ForbiddenPage/>,
+                },
+                {
+                    path: "*",
+                    element: <NotFoundPage/>,
                 },
             ],
         },
