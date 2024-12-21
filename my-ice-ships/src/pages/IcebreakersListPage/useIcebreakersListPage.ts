@@ -114,6 +114,10 @@ export function mapBackendResultToTableData(requests: Icebreaker[]): ITableProps
             creationDate: convertDatetimeToDDMMYYYY(request.date_created),
             registrationDate: convertDatetimeToDDMMYYYY(request.date_formation),
             completionDate: convertDatetimeToDDMMYYYY(request.date_complete),
+            date: request.date,
+            start_point: request.start_point,
+            finish_point: request.finish_point,
+            result: request.result
         };
     });
 
