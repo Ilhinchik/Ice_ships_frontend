@@ -3,7 +3,7 @@ import {Container} from 'react-bootstrap';
 import {IFilters} from "../../components/IFilters/index.tsx";
 import {useIcebreakersListPage} from "./useIcebreakersListPage.ts";
 import {ITable} from "../../components/ITable/index.tsx";
-
+import { Breadcrumbs } from "../../components/Breadcrumbs";
 
 export const IcebreakersListPage = () => {
     const {tableProps, filtersProps} =
@@ -11,6 +11,10 @@ export const IcebreakersListPage = () => {
 
     return (
         <Container>
+            <Breadcrumbs
+
+                            endItem={`Все заявки`}
+                        />
             <h1 className="m-3">Заявки</h1>
             <IFilters {...filtersProps}></IFilters>
             <div className="m-3">

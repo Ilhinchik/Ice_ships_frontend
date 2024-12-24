@@ -8,11 +8,17 @@ import unknownImage from "/images/unknown.png"
 import {Breadcrumbs} from "../../components/Breadcrumbs";
 import {Ship} from "../../core/api/Api.ts";
 import {api} from "../../core/api";
+import { useLocation } from "react-router-dom";
 
 
 export const ShipPage = () => {
     const {id} = useParams();
     const [shipData, setShipData] = useState<Ship | null>(null);
+
+    const location = useLocation();
+    const isFromShipList = location.pathname.includes("/ships_list");
+    const isFromApplications = location.pathname.includes("/ship_list");
+
 
     useEffect(() => {
         if (id) {
@@ -41,8 +47,8 @@ export const ShipPage = () => {
             <Breadcrumbs
                 middleItems={[
                     {
-                        name: "Каталог",
-                        link: "/ships_list"
+                        name: isFromShipList ? "Каталог" : isFromApplications ? "Список кораблей" : "Главная", 
+                        link: isFromShipList ? "/ships_list" : isFromApplications ? "/ship_list" : "/"
                     }
                 ]}
                 endItem={shipData?.ship_name}

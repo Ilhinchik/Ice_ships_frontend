@@ -5,6 +5,7 @@ import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { useIcebreakerPage } from "./useIcebreakerPage";
 
 
+
 export const IcebreakerPage = () => {
     const {
         IcebreakerData,
@@ -27,8 +28,8 @@ export const IcebreakerPage = () => {
             <Breadcrumbs
                 middleItems={[
                     {
-                        name: "Каталог",
-                        link: "/ships_list",
+                        name: isEditable ? "Каталог" : "Все заявки",
+                        link: isEditable ? "/ships_list" : "/icebreakers_list",
                     },
                 ]}
                 endItem={`Заявка на проводку № ${IcebreakerData?.id}`}

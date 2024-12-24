@@ -22,7 +22,7 @@ export const ShipListPage = () => {
     return (
         <Container className="mb-4">
             <Breadcrumbs
-                endItem="Каталог"
+                endItem="Список кораблей"
             />
             <div className="d-flex mt-4 mb-4 p-0">
                 <div className="flex-grow-1">
@@ -58,6 +58,7 @@ export const ShipListPage = () => {
                                         ice_class: ship.ice_class,
                                         length: ship.length,
                                         engine: ship.engine,
+                                        year: ship.year,
                                         image: ship.image || "",
                                         updateCatalogPageFunc: updateCatalogPageFunc,
                                     };
@@ -84,7 +85,7 @@ export const ShipListPage = () => {
                     to={"/add_ship/"}
                     className="btn dark-blue-btn"
                 >
-                    Добавить ПО
+                    Добавить корабль
                 </Link>
             </div>
         </Container>

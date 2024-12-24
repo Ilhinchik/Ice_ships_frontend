@@ -4,5 +4,6 @@ export interface IShipManagerCardProps {
     length?: number | null;
     ice_class?: string | undefined;
     image?: string | null;
+    year: number;
     updateCatalogPageFunc: () => void;
 }

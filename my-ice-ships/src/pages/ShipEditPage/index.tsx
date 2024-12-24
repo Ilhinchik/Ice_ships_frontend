@@ -9,6 +9,7 @@ import {store} from "../../core/store";
 import {addNotification} from "../../core/store/slices/appSlice.ts";
 import unknownImage from "/images/unknown.png"
 import axios from "axios";
+import {Breadcrumbs} from "../../components/Breadcrumbs";
 
 
 export const ShipEditPage = () => {
@@ -157,7 +158,16 @@ export const ShipEditPage = () => {
 
     return (
         <div className="container">
-            <h2 className="mb-3 mt-4">{isEdit ? "Редактирование ПО" : "Добавление ПО"}</h2>
+            <Breadcrumbs
+                middleItems={[
+                    {
+                        name: "Список кораблей  ",
+                        link: "/ship_list"
+                    }
+                ]}
+                endItem={isEdit ? "Редактирование корабля" : "Добавление корабля"}
+            />
+            <h2 className="mb-3 mt-4">{isEdit ? "Редактирование корабля" : "Добавление корабля"}</h2>
             <Row>
                 <Col md={6}>
                     <Form.Group controlId="formTitle" className="mb-3">
@@ -209,7 +219,7 @@ export const ShipEditPage = () => {
                     </Form.Group>
 
                     <Form.Group controlId="formSize" className="mb-3">
-                        <Form.Label>Тип двигателя корабля <sup className="text-danger">*</sup></Form.Label>
+                        <Form.Label>Тип двигателя корабля</Form.Label>
                         <Form.Control
                             type="textarea"
                             name="engine"
@@ -241,7 +251,7 @@ export const ShipEditPage = () => {
             <Row>
                 <Col>
                     <Form.Group controlId="formDescription" className="mb-3">
-                        <Form.Label>Полное описание корабля<sup className="text-danger">*</sup></Form.Label>
+                        <Form.Label>Полное описание корабля</Form.Label>
                         <Form.Control
                             as="textarea"
                             name="description"
@@ -260,7 +270,7 @@ export const ShipEditPage = () => {
                 className="mt-3 mb-3 dark-blue-btn"
                 onClick={handleSubmit}
             >
-                {isEdit ? "Сохранить изменения" : "Добавить ПО"}
+                {isEdit ? "Сохранить изменения" : "Добавить корабль"}
             </Button>
         </div>
     );

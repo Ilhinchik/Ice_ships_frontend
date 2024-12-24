@@ -9,9 +9,9 @@ export const MainLayout: React.FC = () => {
     return (
         <>
             <Navbar/>
-            <Container>
+            {/* <Container>
                 <NotificationBar/>
-            </Container>
+            </Container> */}
             <Outlet/>
         </>
     );

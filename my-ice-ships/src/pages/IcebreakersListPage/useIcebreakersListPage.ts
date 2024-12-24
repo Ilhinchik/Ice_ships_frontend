@@ -1,27 +1,35 @@
 import React, {useEffect, useState} from "react";
 import {IFiltersProps} from "../../components/IFilters/typing.tsx";
 import {ITableProps, ITableRow} from "../../components/ITable/typing.tsx";
-import {api} from "../../core/api/index.ts";
+import {api} from "../../core/api";
 import {Icebreaker} from "../../core/api/Api.ts";
-import {
-    IcebreakersList as ICEBREAKERS_LIST_MOCK
-} from "../../core/mock/IcebreakersList.ts";
-import {useDispatch, useSelector} from "../../core/store/index.ts";
+import {useDispatch, useSelector} from "../../core/store";
 import {selectApp} from "../../core/store/slices/selectors.ts";
 import {
+    saveFilterISRAuthor,
     saveFilterIEndDate,
     saveFilterIStartDate,
     saveFilterIStatus
 } from "../../core/store/slices/appSlice.ts";
+import {useNavigate} from "react-router-dom";
+import {store} from "../../core/store";
+import {addNotification} from "../../core/store/slices/appSlice.ts";
 
 export const useIcebreakersListPage = () => {
-    const [tableProps, setTableProps] = useState<ITableProps>({rows: []});
+    const [tableProps, setTableProps] = useState<ITableProps>({
+        rows: [], updateListPageFunc: () => {
+        }
+    });
 
-    const {filterIStatus, filterIStartDate, filterIEndDate} = useSelector(selectApp);
+    const {filterISRAuthor, filterIStatus, filterIStartDate, filterIEndDate} = useSelector(selectApp);
     const dispatch = useDispatch();
 
     const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         dispatch(saveFilterIStatus(event.target.value))
+    };
+
+    const handleAuthorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(saveFilterISRAuthor(event.target.value))
     };
 
     const handleStartDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +40,8 @@ export const useIcebreakersListPage = () => {
         dispatch(saveFilterIEndDate(event.target.value))
     };
 
+    const navigate = useNavigate();
+
     const handleFilterIClick = () => {
         api.icebreakers.icebreakersList(
             {
@@ -40,19 +50,31 @@ export const useIcebreakersListPage = () => {
                 formation_end: mapStringToOptQueryParam(filterIEndDate),
             })
             .then((data) => {
-                setTableProps(mapBackendResultToTableData(data.data))
-            })
-            .catch(() => {
                 setTableProps(
-                    mapBackendResultToTableData(
-                        filterDataOnFront(ICEBREAKERS_LIST_MOCK,
-                            mapStringToOptQueryParam(filterIStatus),
-                            mapStringToOptQueryParam(filterIStartDate),
-                            mapStringToOptQueryParam(filterIEndDate))
-                    )
-                );
+                    {
+                        rows: filterAndConvertData(data.data, filterISRAuthor),
+                        updateListPageFunc: handleFilterIClick,
+                    })
             })
+            .catch((data) => {
+                    if (data.status == 403) {
+                      navigate("/forbidden")
+                    } else {
+                        store.dispatch(
+                            addNotification({
+                                message: "Ошибка сервера",
+                                isError: true,
+                            })
+                        );
+                    }
+                }
+            )
     };
+
+    useEffect(() => {
+        let id = setTimeout(handleFilterIClick, 2000);
+        return () => clearTimeout(id);
+    });
 
     useEffect(handleFilterIClick,
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,7 +84,8 @@ export const useIcebreakersListPage = () => {
         selectedStatus: filterIStatus,
         selectedStartDate: filterIStartDate,
         selectedEndDate: filterIEndDate,
-
+        selectedAuthor: filterISRAuthor,
+        handleAuthorChange: handleAuthorChange,
         handleStatusChange: handleStatusChange,
         handleStartDateChange: handleStartDateChange,
         handleEndDateChange: handleEndDateChange,
@@ -106,10 +129,15 @@ function convertDatetimeToDDMMYYYY(dateString: string | null | undefined): strin
     return `${day}.${month}.${year}`;
 }
 
-export function mapBackendResultToTableData(requests: Icebreaker[]): ITableProps {
-    const rows: ITableRow[] = requests.map((request) => {
+export function filterAndConvertData(requests: Icebreaker[], clientFilter: string | undefined): ITableRow[] {
+    const filteredRequests = clientFilter
+        ? requests.filter((request) => request.owner === clientFilter)
+        : requests;
+
+    return filteredRequests.map((request) => {
         return {
             number: request.id || 0,
+            owner: request.owner || "",
             status: mapStatusToTable(request.status),
             creationDate: convertDatetimeToDDMMYYYY(request.date_created),
             registrationDate: convertDatetimeToDDMMYYYY(request.date_formation),
@@ -120,17 +148,15 @@ export function mapBackendResultToTableData(requests: Icebreaker[]): ITableProps
             result: request.result
         };
     });
-
-    return {rows};
 }
 
-export function filterDataOnFront(
-    installSoftwareRequestsList: Icebreaker[],
+export function filterMockData(
+    icebreakersList: Icebreaker[],
     filterStatus?: string,
     filterStartDate?: string,
     filterEndDate?: string
 ): Icebreaker[] {
-    return installSoftwareRequestsList.filter((row) => {
+    return icebreakersList.filter((row) => {
         let matchesStatus = true;
         let matchesStartDate = true;
         let matchesEndDate = true;

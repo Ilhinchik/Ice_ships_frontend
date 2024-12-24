@@ -6,6 +6,7 @@ import {Button} from "react-bootstrap";
 import {api} from "../../core/api";
 import {store} from "../../core/store";
 import {addNotification} from "../../core/store/slices/appSlice.ts";
+import "./index.css"
 
 export const ShipManagerCard: FC<IShipManagerCardProps> = (ship: IShipManagerCardProps) => {
     const handleClickDelete = () => {
@@ -13,7 +14,7 @@ export const ShipManagerCard: FC<IShipManagerCardProps> = (ship: IShipManagerCar
             .then(() => {
                 store.dispatch(
                     addNotification({
-                        message: "ПО удалено",
+                        message: "Корабль удалено",
                         isError: false,
                     })
                 );
@@ -22,7 +23,7 @@ export const ShipManagerCard: FC<IShipManagerCardProps> = (ship: IShipManagerCar
             .catch(() => {
                     store.dispatch(
                         addNotification({
-                            message: "Ошибка удаления ПО",
+                            message: "Ошибка удаления корабля",
                             isError: true,
                         })
                     );
@@ -36,12 +37,12 @@ export const ShipManagerCard: FC<IShipManagerCardProps> = (ship: IShipManagerCar
                 <div className="col-md-2 card-body">
                     <img
                         src={ship.image ? (ship.image) : (unknownImage)}
-                        className="img-fluid rounded-start"
+                        className="img-fluid"
                         alt={ship.ship_name}
                         width="100px"
                     />
                 </div>
-                <div className="col-md-4 card-body">
+                <div className="col-md-2 card-body">
                     <h5 className="card-title">
                         <Link
                             to={"/ship/" + ship.id}
@@ -53,10 +54,16 @@ export const ShipManagerCard: FC<IShipManagerCardProps> = (ship: IShipManagerCar
                         </Link>
                     </h5>
                 </div>
-                <div className="col-md-1 card-body">
-                    <p className="card-text"><strong>Ледовый класс: {ship.ice_class}</strong></p>
+                <div className="col-md-2 card-body">
+                    <p className="card-text"><strong>Год постройки: {ship.year}</strong></p>
                 </div>
                 <div className="col-md-1 card-body">
+                    <p className="card-text"><strong>Длина: {ship.length} м</strong></p>
+                </div>
+                <div className="col-md-2 card-body">
+                    <p className="card-text"><strong>Ледовый класс: {ship.ice_class}</strong></p>
+                </div>
+                <div className="col-md-2 card-body">
 
                     <Link
                         to={"/edit_ship/" + ship.id}
@@ -67,7 +74,7 @@ export const ShipManagerCard: FC<IShipManagerCardProps> = (ship: IShipManagerCar
                 </div>
                 <div className="col-md-1 card-body">
                     <Button
-                        className="white-bg dark-blue-border"
+                        className=" btn dark-blue-border otm-button"
                         onClick={handleClickDelete}
                     >
                         Удалить

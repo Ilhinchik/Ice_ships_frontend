@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {IISRTableItemProps} from "./typing.tsx";
+import {ITableItemProps} from "./typing.tsx";
 import {Button, Card, Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {store, useSelector} from "../../core/store";
@@ -7,12 +7,12 @@ import {selectUser} from "../../core/store/slices/selectors.ts";
 import {api} from "../../core/api";
 import {addNotification} from "../../core/store/slices/appSlice.ts";
 
-export const ISRTableItem: FC<IISRTableItemProps> = (isr: IISRTableItemProps) => {
+export const ITableItem: FC<ITableItemProps> = (isr: ITableItemProps) => {
     const {isManager} = useSelector(selectUser);
 
     const handleCompleteClick = () => {
-        api.installSoftwareRequests.installSoftwareRequestsResolveUpdate(
-            isr.pk.toString(),
+        api.icebreakers.icebreakersUpdateStatusAdminUpdate(
+            isr.id.toString(),
             {
                 status: "COMPLETED"
             })
@@ -37,8 +37,8 @@ export const ISRTableItem: FC<IISRTableItemProps> = (isr: IISRTableItemProps) =>
     }
 
     const handleRejectClick = () => {
-        api.installSoftwareRequests.installSoftwareRequestsResolveUpdate(
-            isr.pk.toString(),
+        api.icebreakers.icebreakersUpdateStatusAdminUpdate(
+            isr.id.toString(),
             {
                 status: "REJECTED"
             })
@@ -63,13 +63,13 @@ export const ISRTableItem: FC<IISRTableItemProps> = (isr: IISRTableItemProps) =>
     }
 
     return (
-        <Card key={isr.pk} className="mb-2">
-            <Card.Body className="py-2 px-3">
+        <Card key={isr.id} className="mb-2">
+            <Card.Body className="py-1 px-1">
                 <Row className="d-flex align-items-center">
                     <Col>
                         <Card.Text>
-                            <Link to={"/install_software_request/" + isr.pk} className="text-black">
-                                {isr.pk}
+                            <Link to={"/icebreaker/" + isr.id} className="text-black">
+                                {isr.id}
                             </Link>
                         </Card.Text>
                     </Col>
@@ -77,7 +77,7 @@ export const ISRTableItem: FC<IISRTableItemProps> = (isr: IISRTableItemProps) =>
                         <>
                             <Col>
                                 <Card.Text>
-                                    {isr.client}
+                                    {isr.owner}
                                 </Card.Text>
                             </Col>
                         </> :
@@ -87,6 +87,21 @@ export const ISRTableItem: FC<IISRTableItemProps> = (isr: IISRTableItemProps) =>
                     <Col>
                         <Card.Text>
                             {isr.status}
+                        </Card.Text>
+                    </Col>
+                    <Col>
+                        <Card.Text>
+                            {isr.date}
+                        </Card.Text>
+                    </Col>
+                    <Col>
+                        <Card.Text>
+                            {isr.start_point}
+                        </Card.Text>
+                    </Col>
+                    <Col>
+                        <Card.Text>
+                            {isr.finish_point}
                         </Card.Text>
                     </Col>
                     <Col>
@@ -118,7 +133,7 @@ export const ISRTableItem: FC<IISRTableItemProps> = (isr: IISRTableItemProps) =>
                             <Col>
                                 <Button
                                     onClick={handleRejectClick}
-                                    className="white-bg dark-blue-border"
+                                    className="otm-button"
                                     disabled={isr.status != "В работе"}
 
                                 >
