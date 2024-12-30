@@ -32,7 +32,7 @@ export const LoginForm = () => {
                         username: loginFormData.username,
                         isManager: data.data.is_staff || false,
                     }))
-                localStorage.setItem(USER_NAME, loginFormData.username);
+                // localStorage.setItem(USER_NAME, loginFormData.username);
                 store.dispatch(
                     addNotification({
                         message: "Добро пожаловать!",

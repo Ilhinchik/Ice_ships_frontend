@@ -39,15 +39,14 @@ export const ITable: FC<ITableProps> = (tableProps: ITableProps) => {
                         <Col>
                             <Card.Text><strong>Конечная точка</strong></Card.Text>
                         </Col>
-                        <Col>
-                            <Card.Text><strong>Дата создания</strong></Card.Text>
-                        </Col>
+                        
                         <Col>
                             <Card.Text><strong>Дата оформления</strong></Card.Text>
                         </Col>
                         <Col>
-                            <Card.Text><strong>Дата завершения</strong></Card.Text>
+                            <Card.Text><strong>Результат проводки</strong></Card.Text>
                         </Col>
+                        
 
                         {isManager ?
                             <>

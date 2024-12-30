@@ -47,8 +47,8 @@ export const ShipPage = () => {
             <Breadcrumbs
                 middleItems={[
                     {
-                        name: isFromShipList ? "Каталог" : isFromApplications ? "Список кораблей" : "Главная", 
-                        link: isFromShipList ? "/ships_list" : isFromApplications ? "/ship_list" : "/"
+                        name: "Каталог",
+                        link: "/ships_list"
                     }
                 ]}
                 endItem={shipData?.ship_name}

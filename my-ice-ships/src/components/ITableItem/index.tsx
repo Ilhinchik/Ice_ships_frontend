@@ -104,28 +104,28 @@ export const ITableItem: FC<ITableItemProps> = (isr: ITableItemProps) => {
                             {isr.finish_point}
                         </Card.Text>
                     </Col>
-                    <Col>
-                        <Card.Text>
-                            {isr.creationDate}
-                        </Card.Text>
-                    </Col>
+                    
                     <Col>
                         <Card.Text>
                             {isr.registrationDate}
                         </Card.Text>
                     </Col>
                     <Col>
-                        <Card.Text>
-                            {isr.completionDate}
-                        </Card.Text>
+                    {isr.result !== null ? (
+        <Card.Text>
+            {isr.result ? "Успешно" : "Неуспешно"}
+        </Card.Text>
+    ) : (
+        <Card.Text>Результат отсутствует</Card.Text>
+    )}
                     </Col>
+                    
                     {isManager?
                         <>
                             <Col>
                                 <Button
                                     onClick={handleCompleteClick}
-                                    className="dark-blue-btn"
-                                    disabled={isr.status != "В работе"}
+                                    className={`dark-blue-btn ${isr.status != "В работе" ? "hidden" : ""}`}
                                 >
                                     Завершить
                                 </Button>
@@ -133,8 +133,7 @@ export const ITableItem: FC<ITableItemProps> = (isr: ITableItemProps) => {
                             <Col>
                                 <Button
                                     onClick={handleRejectClick}
-                                    className="otm-button"
-                                    disabled={isr.status != "В работе"}
+                                    className={`otm-button ${isr.status != "В работе" ? "hidden" : ""}`}
 
                                 >
                                     Отклонить

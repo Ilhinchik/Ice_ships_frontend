@@ -1,9 +1,11 @@
 import "./index.css";
 import {Container} from "react-bootstrap";
+import TrafficLight1 from "../../components/TrafficLight1";
 
 export const HomePage = () => {
     return (
         <>
+        <TrafficLight1/>
                 <Container className="intro">
                     <h1>Проводка ледовых кораблей ледоколом</h1>
                     <Container className="div text">

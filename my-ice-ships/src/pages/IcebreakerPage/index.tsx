@@ -49,6 +49,16 @@ export const IcebreakerPage = () => {
             <div className="col-12 col-md-4 offset-md-4">
                 <h5 id="finish_point" className="form-control-plaintext">Конечная точка проводки: {IcebreakerData?.finish_point}</h5>
             </div>
+            <div className="col-12 col-md-4 offset-md-4">
+                <h5 id="result" className="form-control-plaintext">
+                    Результат проводки:{" "}
+                    {IcebreakerData?.result === null
+                        ? "Результат отсутствует"
+                        : IcebreakerData?.result
+                        ? "Успешно"
+                        : "Неуспешно"}
+                </h5>
+            </div>
                 </>
             )}
             {isEditable && (

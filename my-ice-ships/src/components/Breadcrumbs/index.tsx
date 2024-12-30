@@ -3,6 +3,8 @@ import {FC} from "react";
 import {IBreadcrumbs} from "./typing.tsx";
 import {Link} from "react-router-dom";
 
+import TrafficLight1 from "../TrafficLight1";
+
 export const Breadcrumbs: FC<IBreadcrumbs> = (props) => {
     const {
         endItem,
@@ -24,6 +26,8 @@ export const Breadcrumbs: FC<IBreadcrumbs> = (props) => {
                 ) : (<></>)}
                 <li className="breadcrumb-item active" aria-current="page">{endItem}</li>
             </ol>
+            
         </nav>
+        
     );
 };
