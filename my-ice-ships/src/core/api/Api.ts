@@ -127,7 +127,7 @@ export interface FullIcebreaker {
    */
   finish_point?: string | null;
   /** Результат проводки (0/1) */
-  result?: boolean | null;
+  result?: number | null;
   /** Status */
   status?: "DRAFT" | "DELETED" | "FORMED" | "COMPLETED" | "REJECTED";
   /** Пользователь */

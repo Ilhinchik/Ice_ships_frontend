@@ -113,8 +113,8 @@ export const ITableItem: FC<ITableItemProps> = (isr: ITableItemProps) => {
                     <Col>
                     {isr.result !== null ? (
         <Card.Text>
-            {isr.result ? "Успешно" : "Неуспешно"}
-        </Card.Text>
+        {isr.result === 1 ? "В обработке" : (isr.result === 2 ? "Успешно" : "Неуспешно")}
+    </Card.Text>
     ) : (
         <Card.Text>Результат отсутствует</Card.Text>
     )}

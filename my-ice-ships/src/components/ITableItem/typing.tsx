@@ -8,6 +8,6 @@ export interface ITableItemProps {
     date: string;
     start_point: string;
     finish_point: string;
-    result: boolean;
+    result: number;
     updateListPageFunc: () => void;
 }

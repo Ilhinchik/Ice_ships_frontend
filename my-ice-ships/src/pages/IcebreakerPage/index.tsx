@@ -52,11 +52,11 @@ export const IcebreakerPage = () => {
             <div className="col-12 col-md-4 offset-md-4">
                 <h5 id="result" className="form-control-plaintext">
                     Результат проводки:{" "}
-                    {IcebreakerData?.result === null
-                        ? "Результат отсутствует"
-                        : IcebreakerData?.result
-                        ? "Успешно"
-                        : "Неуспешно"}
+                    {IcebreakerData?.result === 1
+        ? "В обработке"
+        : IcebreakerData?.result === 2
+        ? "Успешно"
+        : "Неуспешно"}
                 </h5>
             </div>
                 </>
